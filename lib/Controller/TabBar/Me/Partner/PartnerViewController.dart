@@ -1,13 +1,16 @@
 
-import 'package:one/CellItem.dart';
-import 'package:one/Controller/TabBar/Me/Partner/AdvancedDividend/AdvancedDividendViewController.dart';
-import 'package:one/Controller/TabBar/Me/Partner/EnterpriseCommission/EnterpriseCommissionViewController.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Views/CardSeries/CardHeaderTip.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/CellItem.dart';
+
+import 'package:demo2020/Controller/TabBar/Me/Partner/EnterpriseCommission/EnterpriseCommissionViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Partner/EnterpriseCommission/AdvancedEnterpriseCommissionViewController.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Views/CardSeries/CardHeaderTip.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
+
+import 'EnterpriseCommission/AdvancedEnterpriseCommissionViewController.dart';
 
 /**
  * 合伙人服务
@@ -48,7 +51,7 @@ class _PartnerViewControllerState extends State<PartnerViewController> {
           children: <Widget>[
             CardHeaderTip("*准高级合伙人"),
             CellItem(imagePath:'images/icon_look.png',title: '代收分红', subtitle: "等级提升后可到钱包提现",onPressed: () {
-              routePush(AdvancedDividendViewController("代收分红"));
+              routePush(AdvancedEnterpriseCommissionViewController());
             },),
           ],
         ),

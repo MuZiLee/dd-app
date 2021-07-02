@@ -1,16 +1,16 @@
 
 import 'dart:convert';
 
-import 'package:one/Model/EventTeacherAudit.dart';
-import 'package:one/Model/EventsStaff.dart';
-import 'package:one/Model/FactoryInfo.dart';
-import 'package:one/Model/FactoryStaff.dart';
-import 'package:one/Model/HRFactoryInfoModel.dart';
-import 'package:one/Model/JobModel.dart';
-import 'package:one/Provider/API.dart';
-import 'package:one/Provider/Location.dart';
-import 'package:one/Provider/SBRequest/SBRequest.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Model/EventTeacherAudit.dart';
+import 'package:demo2020/Model/EventsStaff.dart';
+import 'package:demo2020/Model/FactoryInfo.dart';
+import 'package:demo2020/Model/FactoryStaff.dart';
+import 'package:demo2020/Model/HRFactoryInfoModel.dart';
+import 'package:demo2020/Model/JobModel.dart';
+import 'package:demo2020/Provider/API.dart';
+import 'package:demo2020/Provider/Location.dart';
+import 'package:demo2020/Provider/SBRequest/SBRequest.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:nav_router/nav_router.dart';
 import 'package:ovprogresshud/progresshud.dart';
@@ -32,16 +32,16 @@ class FactoryManager extends ChangeNotifier {
       JobType(title: "7000~8000", minimum_search_range: 7000, maximum_salary_range: 8000, isHot: 0, index: 1),
       JobType(title: "8000~9000", minimum_search_range: 8000, maximum_salary_range: 9000, isHot: 0, index: 1),
       JobType(title: "9000~1万", minimum_search_range: 9000, maximum_salary_range: 10000, isHot: 0, index: 1),
-      JobType(title: "1万~2万", minimum_search_range: 10000, maximum_salary_range: 200000, isHot: 0, index: 1),
-      JobType(title: "2万~3万", minimum_search_range: 20000, maximum_salary_range: 300000, isHot: 0, index: 1),
-      JobType(title: "3万~4万", minimum_search_range: 30000, maximum_salary_range: 400000, isHot: 0, index: 1),
-      JobType(title: "4万~5万", minimum_search_range: 40000, maximum_salary_range: 500000, isHot: 0, index: 1),
-      JobType(title: "5万~6万", minimum_search_range: 50000, maximum_salary_range: 600000, isHot: 0, index: 1),
-      JobType(title: "6万~7万", minimum_search_range: 60000, maximum_salary_range: 700000, isHot: 0, index: 1),
-      JobType(title: "7万~8万", minimum_search_range: 700000, maximum_salary_range: 800000, isHot: 0, index: 1),
-      JobType(title: "8万~8万", minimum_search_range: 800000, maximum_salary_range: 900000, isHot: 0, index: 1),
-      JobType(title: "9万~10万", minimum_search_range: 900000, maximum_salary_range: 1000000, isHot: 0, index: 1),
-      JobType(title: "10万以上", minimum_search_range: 900000, maximum_salary_range: 10000000, isHot: 0, index: 1),
+      // JobType(title: "1万~2万", minimum_search_range: 10000, maximum_salary_range: 200000, isHot: 0, index: 1),
+      // JobType(title: "2万~3万", minimum_search_range: 20000, maximum_salary_range: 300000, isHot: 0, index: 1),
+      // JobType(title: "3万~4万", minimum_search_range: 30000, maximum_salary_range: 400000, isHot: 0, index: 1),
+      // JobType(title: "4万~5万", minimum_search_range: 40000, maximum_salary_range: 500000, isHot: 0, index: 1),
+      // JobType(title: "5万~6万", minimum_search_range: 50000, maximum_salary_range: 600000, isHot: 0, index: 1),
+      // JobType(title: "6万~7万", minimum_search_range: 60000, maximum_salary_range: 700000, isHot: 0, index: 1),
+      // JobType(title: "7万~8万", minimum_search_range: 700000, maximum_salary_range: 800000, isHot: 0, index: 1),
+      // JobType(title: "8万~8万", minimum_search_range: 800000, maximum_salary_range: 900000, isHot: 0, index: 1),
+      // JobType(title: "9万~10万", minimum_search_range: 900000, maximum_salary_range: 1000000, isHot: 0, index: 1),
+      // JobType(title: "10万以上", minimum_search_range: 900000, maximum_salary_range: 10000000, isHot: 0, index: 1),
     ];
   }
 
@@ -72,17 +72,18 @@ class FactoryManager extends ChangeNotifier {
   /**`
    * usableJobList
    */
-  static usableJobList({int jtid = 1, bool soty = true, int minimum_search_range = 0, int isHot = 0, int maximum_salary_range = 100000, int page = 1, int limit = 15}) async {
+  static usableJobList({int jtid = 1, bool soty = true, int minimum_search_range = 0, int isHot = 0, int maximum_salary_range = 100000, int page = 1, int limit = 15, city}) async {
     var url = "factory/usableJobList";
     var arguments = {
-      "latitude": Location?.amap?.latitude != null ? Location?.amap?.latitude : 0,
-      "longitude": Location.amap.longitude != null ? Location.amap.longitude : 0,
+      "latitude": Location.latitude != null ? Location.latitude : 0,
+      "longitude": Location.longitude != null ? Location.longitude : 0,
       "minimum_search_range" : minimum_search_range,
       "maximum_salary_range" : maximum_salary_range,
       "jtid"     : jtid,
       "isHot"     : isHot,
       "page"     : page,
       "limit"    : limit,
+      "city" : city
     };
     print(arguments);
     SBResponse response = await SBRequest.post(url, arguments: arguments);
@@ -91,22 +92,26 @@ class FactoryManager extends ChangeNotifier {
       jobs.add(JobModel.fromJson(json));
     }).toList();
 
-    if (jobs.length > 2) {
-//      if (soty == true) {
-//        jobs = jobs.reversed;
-//      }
-      /// 插入职位广告
-//      List ads = await API.getAdList(type: 2);
+    if (jobs.length > 1) {
+      if (soty == true) {
+        jobs.sort((left,right)=>left.distance.compareTo(right.distance));
+      } else {
+        jobs.sort((left,right)=>right.distance.compareTo(left.distance));
+      }
+    }
 
-//      int tmp = 0;
-//      for (int i = 1; i<=jobs.length; i++) {
-//        // 当i>0为偶数时
-//        print(jobs.length.toString() + ":" + i.toString()  + "  "+ jobs.length.toString() + ":" +  tmp.toString());
-//        if (jobs.length > tmp && i.isEven == true) {
-//          jobs.insert(i, ads[tmp]);
-//          tmp ++;
-//        }
-//      }
+    if (jobs.length > 2) {
+
+      /// 插入职位广告
+     List ads = await API.getAdList(type: 2);
+
+     int tmp = 0;
+     for (int i = 0; i<jobs.length; i++) {
+        if (i > 0 && i % 2 == 0) {
+          jobs.insert(i+tmp, ads[tmp]);
+          tmp++;
+        }
+     }
     }
     return jobs;
   }
@@ -155,8 +160,8 @@ class FactoryManager extends ChangeNotifier {
       "keyword": keyword,
       "page": page,
       "limit": limit,
-      "latitude": Location?.amap?.latitude != null ? Location?.amap?.latitude : 0,
-      "longitude": Location?.amap?.longitude != null ? Location?.amap?.longitude : 0,
+      "latitude": Location.latitude ?? 0,
+      "longitude": Location.longitude ?? 0,
     };
     SBResponse response = await SBRequest.post(url, arguments: arguments);
     List jobs = [];

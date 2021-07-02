@@ -8,15 +8,15 @@
 //  版权所有 © 2019。 保留所有权利
 //
 
-import 'package:one/Controller/TabBar/Home/Details/JobDetailsViewController.dart';
-import 'package:one/Controller/TabBar/Home/JobItem.dart';
-import 'package:one/Model/JobModel.dart';
-import 'package:one/Provider/FactoryManager.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/CardSeries/CardRefresherListView.dart';
-import 'package:one/Views/SearchBarView.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Controller/TabBar/Home/Details/JobDetailsViewController.dart';
+import 'package:demo2020/Controller/TabBar/Home/JobItem.dart';
+import 'package:demo2020/Model/JobModel.dart';
+import 'package:demo2020/Provider/FactoryManager.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherListView.dart';
+import 'package:demo2020/Views/SearchBarView.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';

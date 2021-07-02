@@ -1,7 +1,7 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import 'package:one/Views/card_settings/widgets/picker_fields/card_settings_checkbox_picker.dart';
+import 'package:demo2020/Views/card_settings/widgets/picker_fields/card_settings_checkbox_picker.dart';
 import 'package:flutter/material.dart';
 
 /// This is a selection widget that allows an arbitrary list of options to be provided.

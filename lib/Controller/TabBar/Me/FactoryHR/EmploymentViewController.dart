@@ -1,13 +1,12 @@
-
-import 'package:one/Model/FactoryInfo.dart';
-import 'package:one/Model/HRFactoryInfoModel.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
-import 'package:one/Views/syncfusion_charts/charts.dart';
+import 'package:demo2020/Model/HRFactoryInfoModel.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Views/syncfusion_charts/charts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class EmploymentViewController extends StatefulWidget {
   final HRFactoryInfoModel factoryInfo;
+
   EmploymentViewController({this.factoryInfo});
 
   @override
@@ -41,8 +40,11 @@ List<PieSeries<_PieData, String>> getPieSeries(HRFactoryInfoModel factoryInfo) {
   final List<_PieData> pieData = <_PieData>[
     _PieData('计划招聘人数', factoryInfo.information.expected_demand,
         '计划招聘人数 \n ${factoryInfo.information.expected_demand}人'),
-    _PieData('入职', (factoryInfo.injobCount), '入职 \n ${factoryInfo.injobCount}人'),
-    _PieData('缺少', factoryInfo.information.expected_demand - factoryInfo.injobCount,
+    _PieData(
+        '入职', (factoryInfo.injobCount), '入职 \n ${factoryInfo.injobCount}人'),
+    _PieData(
+        '缺少',
+        factoryInfo.information.expected_demand - factoryInfo.injobCount,
         '缺少 \n ${factoryInfo.information.expected_demand - factoryInfo.injobCount}人'),
     _PieData('离职', factoryInfo.quitCount, '离职 \n ${factoryInfo.quitCount}人'),
   ];

@@ -1,4 +1,4 @@
-import 'package:one/Model/User.dart';
+import 'package:demo2020/Model/User.dart';
 
 /// id : 1
 /// uid : 73

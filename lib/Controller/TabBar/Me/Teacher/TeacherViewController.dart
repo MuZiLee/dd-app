@@ -1,17 +1,18 @@
-import 'package:one/CellItem.dart';
-import 'package:one/Controller/TabBar/Me/Teacher/AttendanceViewController.dart';
-import 'package:one/Controller/TabBar/Me/Teacher/FactoryCalculationWagesViewController.dart';
-import 'package:one/Controller/TabBar/Me/Teacher/FactoryLeaveAuditViewController.dart';
-import 'package:one/Controller/TabBar/Me/Teacher/FactoryQuitViewController.dart';
-import 'package:one/Controller/TabBar/Me/Teacher/FactoryInJobViewController.dart';
-import 'package:one/Controller/TabBar/Me/Teacher/FactoryReimbursementAuditViewController.dart';
-import 'package:one/Model/JobModel.dart';
-import 'package:one/Model/User.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/EventsManager.dart';
-import 'package:one/Views/CardSeries/CardHeaderTip.dart';
-import 'package:one/Views/CardSeries/CardShowActionSheetController.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/CellItem.dart';
+import 'package:demo2020/Controller/TabBar/Me/Partner/EnterpriseCommission/TeacherEnterpriseCommissionViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Teacher/AttendanceViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Teacher/FactoryCalculationWagesViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Teacher/FactoryLeaveAuditViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Teacher/FactoryQuitViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Teacher/FactoryInJobViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Teacher/FactoryReimbursementAuditViewController.dart';
+import 'package:demo2020/Model/JobModel.dart';
+import 'package:demo2020/Model/User.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/EventsManager.dart';
+import 'package:demo2020/Views/CardSeries/CardHeaderTip.dart';
+import 'package:demo2020/Views/CardSeries/CardShowActionSheetController.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
@@ -98,7 +99,7 @@ class _TeacherViewControllerState extends State<TeacherViewController> {
     }).toList();
 
     return BaseScaffold(
-      title: "驻场老师服务",
+      title: "工厂管理",
       child: ListView(
         children: children,
       ),

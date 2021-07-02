@@ -2,7 +2,7 @@
 
 library block_colorpicker;
 
-import 'package:one/Views/card_settings/flutter_colorpicker/utils.dart';
+import 'package:demo2020/Views/card_settings/flutter_colorpicker/utils.dart';
 import 'package:flutter/material.dart';
 
 

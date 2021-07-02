@@ -1,8 +1,8 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:one/Controller/TabBar/Home/Details/JobDetailsViewController.dart';
-import 'package:one/Model/JobModel.dart';
-import 'package:one/Views/SBImage.dart';
+import 'package:demo2020/Controller/TabBar/Home/Details/JobDetailsViewController.dart';
+import 'package:demo2020/Model/JobModel.dart';
+import 'package:demo2020/Views/SBImage.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
 

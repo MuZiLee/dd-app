@@ -1,9 +1,9 @@
 
-import 'package:one/Model/AnnouncementModel.dart';
-import 'package:one/Model/ArticlesModel.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/SBRequest/SBRequest.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Model/AnnouncementModel.dart';
+import 'package:demo2020/Model/ArticlesModel.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/SBRequest/SBRequest.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 
 class ArticleManager {
 

@@ -1,21 +1,23 @@
 import 'dart:io';
 
-import 'package:one/Model/ShopCategory.dart';
-import 'package:one/Provider/ShopManager.dart';
-import 'package:one/Provider/StaffManager.dart';
-import 'package:one/Views/CardSeries/CardRefresherListView.dart';
+import 'package:demo2020/Model/ShopCategory.dart';
+import 'package:demo2020/Provider/ShopManager.dart';
+import 'package:demo2020/Provider/ShopProviders.dart';
+import 'package:demo2020/Provider/StaffManager.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherListView.dart';
+import 'package:demo2020/Views/CardSeries/CardShowActionSheetController.dart';
+import 'package:demo2020/Views/card_settings/widgets/card_settings_panel.dart';
 import 'package:flutter_luban/flutter_luban.dart';
-import 'package:one/Views/card_settings/card_settings.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesNumber.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesRight.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesText.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesTextView.dart';
-import 'package:one/Views/MyBehavior.dart';
-import 'package:one/Views/SBImage.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
-import 'package:one/config.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesNumber.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesRight.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesText.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesTextView.dart';
+import 'package:demo2020/Views/MyBehavior.dart';
+import 'package:demo2020/Views/SBImage.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/config.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -55,6 +57,7 @@ class _AddGoodsViewControllerState extends State<AddGoodsViewController> {
       actions: <Widget>[
         Container(
           padding: EdgeInsets.all(10),
+          // ignore: deprecated_member_use
           child: FlatButton(
             color: Colors.deepOrangeAccent,
             child: Text("发布", style: TextStyle(color: Colors.white)),
@@ -102,208 +105,212 @@ class _AddGoodsViewControllerState extends State<AddGoodsViewController> {
           ),
         )
       ],
-      child: Consumer<ShopManager>(builder: (_, provider, chld) {
-        return CardSettings(
-          cardElevation: 0.0,
-          // padding: 0.0,
-          children: <Widget>[
-            CardViewSeriesRight(
-              title: "商品类型",
-              subtitle: currentCategory != null ? currentCategory.name : "点击选择",
-              isNotNull: true,
-              onTap: () async {
-                List categorylist = await ShopManager.categorylist();
+      child: SingleChildScrollView(
+        child: buildColumn(),
+      ),
+    );
+  }
 
-                showModalBottomSheet(
-                  backgroundColor: Colors.transparent,
-                  context: context,
-                  builder: (c) {
-                    return DraggableScrollableSheet(
-                      initialChildSize: 1.0,
-                      maxChildSize: 1.0,
-                      minChildSize: 0.5,
-                      builder: (BuildContext context,
-                          ScrollController scrollController) {
-                        return Container(
-                          color: Colors.white,
-                          child: StatefulBuilder(
-                            builder: (BuildContext context2, setter) {
-                              return CardRefresherListView(
-                                itemCount: categorylist.length,
-                                itemBuilder: (_, index) {
-                                  ShopCategory category = categorylist[index];
+  buildColumn() {
+    return Column(
+      children: <Widget>[
+        CardViewSeriesRight(
+          title: "商品类型",
+          subtitle: currentCategory != null ? currentCategory.name : "点击选择",
+          isNotNull: true,
+          onTap: () async {
+            List categorylist = await ShopManager.categorylist();
 
-                                  return Column(
-                                    children: <Widget>[
-                                      InkWell(
-                                          child: ListTile(
-                                            title: Text(category.name),
-                                            trailing:
-                                                Icon(Icons.panorama_fish_eye),
-                                          ),
-                                          onTap: () {
-                                            /// 搜索职位
-                                            currentCategory = category;
-                                            setState(() {});
-                                            pop();
-                                          }),
-                                      Divider(height: 1),
-                                    ],
-                                  );
-                                },
+            showModalBottomSheet(
+              backgroundColor: Colors.transparent,
+              context: context,
+              builder: (c) {
+                return DraggableScrollableSheet(
+                  initialChildSize: 1.0,
+                  maxChildSize: 1.0,
+                  minChildSize: 0.5,
+                  builder: (BuildContext context,
+                      ScrollController scrollController) {
+                    return Container(
+                      color: Colors.white,
+                      child: StatefulBuilder(
+                        builder: (BuildContext context2, setter) {
+                          return CardRefresherListView(
+                            itemCount: categorylist.length,
+                            itemBuilder: (_, index) {
+                              ShopCategory category = categorylist[index];
+
+                              return Column(
+                                children: <Widget>[
+                                  InkWell(
+                                      child: ListTile(
+                                        title: Text(category.name),
+                                        trailing:
+                                        Icon(Icons.panorama_fish_eye),
+                                      ),
+                                      onTap: () {
+                                        /// 搜索职位
+                                        currentCategory = category;
+                                        setState(() {});
+                                        pop();
+                                      }),
+                                  Divider(height: 1),
+                                ],
                               );
                             },
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     );
                   },
                 );
               },
-            ),
-            CardViewSeriesText(
-              title: "标题",
-              placeholder: "标题名称",
-              isNotNull: true,
-              onChanged: (value) {
-                title = value;
-                setState(() {
+            );
+          },
+        ),
+        CardViewSeriesText(
+          title: "标题",
+          placeholder: "标题名称",
+          isNotNull: true,
+          onChanged: (value) {
+            title = value;
+            setState(() {
 
-                });
-              },
-            ),
-            CardViewSeriesTextView(
-              title: "介绍",
-              placeholder: "宝贝介绍...",
-              text: details.length > 0 ? "${details}¥" : null,
-              isNotNull: true,
-              valueChanged: (value) {
-                setState(() {
-                  details = value;
-                });
-              },
-            ),
-            Container(
-              height: 140,
-              color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(left: 10, top: 10, bottom: 10),
-                    child: Row(
-                      children: <Widget>[
-                        Container(
-                          child: Text("实物图",
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.black,
-                                  decoration: TextDecoration.none)),
-                        ),
-                        Text("*",
-                            style: TextStyle(
-                                color: Colors.red,
-                                decoration: TextDecoration.none)),
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(right: 10),
-                            child: Text(
-                              "首张图片为封面",
-                              textDirection: TextDirection.rtl,
-                              style: TextStyle(
-                                  fontSize: 10,
-                                  color: Colors.black38,
-                                  decoration: TextDecoration.none),
-                            ),
-                          ),
-                        ),
-                      ],
+            });
+          },
+        ),
+        CardViewSeriesTextView(
+          title: "介绍",
+          placeholder: "宝贝介绍...",
+          text: details.length > 0 ? "${details}¥" : null,
+          isNotNull: true,
+          valueChanged: (value) {
+            setState(() {
+              details = value;
+            });
+          },
+        ),
+        Container(
+          height: 140,
+          color: Colors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.only(left: 10, top: 10, bottom: 10),
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      child: Text("实物图",
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black,
+                              decoration: TextDecoration.none)),
                     ),
-                  ),
-                  Expanded(
-                    child: ScrollConfiguration(
-                      behavior: MyBehavior(),
-                      child: CustomScrollView(
-                        slivers: <Widget>[
-                          SliverGrid(
-                            delegate: SliverChildBuilderDelegate(
-                                  (_, int index) {
-                                String url = images[index];
-                                return FlatButton(
-                                  color: Colors.white,
-                                  child: SBImage(
-                                    url: url,
-                                    error: Image.asset("images/addImage.png"),
-                                  ),
-                                  onPressed: () {
-                                    currentIndex = index;
-                                    showCupertinoModalPopup(
-                                      context: context,
-                                      builder: (context) {
-                                        return CupertinoActionSheet(
-                                          title: Text('上传头像', style: TextStyle(fontSize: 14)), //标题
-                                          message: Text('请选择获取照片方式'), //提示内容
-                                          actions: <Widget>[
-                                            //操作按钮集合
-                                            CupertinoActionSheetAction(
-                                              child: Text('从相册获取',style: TextStyle(fontSize: 14)),
-                                              onPressed: () {
-                                                retrieveLostData();
-                                              },
-                                            ),
-                                            CupertinoActionSheetAction(
-                                              child: Text('拍照',style: TextStyle(fontSize: 14)),
-                                              onPressed: () {
-                                                cameraLostData();
-                                              },
-                                            ),
-                                          ],
-                                          cancelButton: CupertinoActionSheetAction(
-                                            //取消按钮
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            child: Text('取消',style: TextStyle(fontSize: 16)),
-                                          ),
-                                        );
-                                      },
+                    Text("*",
+                        style: TextStyle(
+                            color: Colors.red,
+                            decoration: TextDecoration.none)),
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.only(right: 10),
+                        child: Text(
+                          "首张图片为封面",
+                          textDirection: TextDirection.rtl,
+                          style: TextStyle(
+                              fontSize: 10,
+                              color: Colors.black38,
+                              decoration: TextDecoration.none),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: ScrollConfiguration(
+                  behavior: MyBehavior(),
+                  child: CustomScrollView(
+                    slivers: <Widget>[
+                      SliverGrid(
+                        delegate: SliverChildBuilderDelegate(
+                              (_, int index) {
+                            String url = images[index];
+                            // ignore: deprecated_member_use
+                            return FlatButton(
+                              color: Colors.white,
+                              child: SBImage(
+                                url: url,
+                                error: Image.asset("images/addImage.png"),
+                              ),
+                              onPressed: () {
+                                currentIndex = index;
+                                showCupertinoModalPopup(
+                                  context: context,
+                                  builder: (context) {
+                                    return CupertinoActionSheet(
+                                      title: Text('上传头像', style: TextStyle(fontSize: 14)), //标题
+                                      message: Text('请选择获取照片方式'), //提示内容
+                                      actions: <Widget>[
+                                        //操作按钮集合
+                                        CupertinoActionSheetAction(
+                                          child: Text('从相册获取',style: TextStyle(fontSize: 14)),
+                                          onPressed: () {
+                                            retrieveLostData();
+                                          },
+                                        ),
+                                        CupertinoActionSheetAction(
+                                          child: Text('拍照',style: TextStyle(fontSize: 14)),
+                                          onPressed: () {
+                                            cameraLostData();
+                                          },
+                                        ),
+                                      ],
+                                      cancelButton: CupertinoActionSheetAction(
+                                        //取消按钮
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('取消',style: TextStyle(fontSize: 16)),
+                                      ),
                                     );
                                   },
                                 );
                               },
-                              childCount: images.length,
-                            ),
-                            gridDelegate:
-                            SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 4,
-                                mainAxisSpacing: 0.0,
-                                crossAxisSpacing: 0.0),
-                          )
-                        ],
-                      ),
-                    ),
+                            );
+                          },
+                          childCount: images.length,
+                        ),
+                        gridDelegate:
+                        SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 4,
+                            mainAxisSpacing: 0.0,
+                            crossAxisSpacing: 0.0),
+                      )
+                    ],
                   ),
-                  SizedBox(height: 10),
-                  Divider(height: 1)
-                ],
+                ),
               ),
-            ),
-            CardViewSeriesNumber(
-              title: "价格",
-              isNotNull: true,
-              placeholder: "开个价",
-              onChanged: (value) {
-                var onePointOne = double.parse(value);
-                print(onePointOne);
-                price = onePointOne;
-                setState(() {});
-              },
-            ),
-          ],
-        );
-      }),
+              SizedBox(height: 10),
+              Divider(height: 1)
+            ],
+          ),
+        ),
+        CardViewSeriesNumber(
+          title: "价格",
+          isNotNull: true,
+          placeholder: "开个价",
+          onChanged: (value) {
+            var onePointOne = double.parse(value);
+            print(onePointOne);
+            price = onePointOne;
+            setState(() {});
+          },
+        ),
+      ],
     );
   }
+
 
   Future<void> retrieveLostData() async {
     Navigator.of(context).pop();

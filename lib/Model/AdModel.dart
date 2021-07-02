@@ -1,4 +1,6 @@
-import 'package:one/config.dart';
+import 'package:demo2020/config.dart';
+
+import '../config.dart';
 
 /// id : 9
 /// type : 0: 启动广告 1:banner广告 2:职位广告

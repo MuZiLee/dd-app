@@ -1,11 +1,12 @@
 
-import 'package:one/Controller/TabBar/Chat/TouchCallBack.dart';
-import 'package:one/Model/User.dart';
-import 'package:one/Provider/IM.dart';
-import 'package:one/Views/CardSeries/CardChatTableViewCell.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/CardSeries/CardRefresherSliverList.dart';
-import 'package:one/Views/CardSeries/CardShowActionSheetController.dart';
+import 'package:demo2020/Controller/TabBar/Chat/TouchCallBack.dart';
+import 'package:demo2020/Model/User.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/IM.dart';
+import 'package:demo2020/Views/CardSeries/CardChatTableViewCell.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherSliverList.dart';
+import 'package:demo2020/Views/CardSeries/CardShowActionSheetController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -112,7 +113,7 @@ class SearchUserViewControllerState extends State<SearchUserViewController> {
                               icon: Icon(Icons.add_circle, color: Colors.deepOrange, size: 21),
                             ),
                             onTap: () {
-                              _onTap(_user.phone, index);
+                              _onTap(_user, index);
                             },
                           );
                         }
@@ -128,7 +129,7 @@ class SearchUserViewControllerState extends State<SearchUserViewController> {
     );
   }
 
-  _onTap(phone, index) async {
+  _onTap(User user, index) async {
 
     CardShowActionSheetController(
       context,
@@ -139,7 +140,8 @@ class SearchUserViewControllerState extends State<SearchUserViewController> {
             child: Text('申请好友', style: TextStyle(fontSize: 14)),
             onPressed: () async{
 
-              await IM.addFriend(phone:phone);
+              await IM.addFriend(phone:user.phone);
+              await Account.addFriend(tuid: user.id, fuid: Account.user.id);
               Navigator.pop(context);
             }),
       ]

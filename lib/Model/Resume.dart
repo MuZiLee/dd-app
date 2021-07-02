@@ -3,7 +3,7 @@ class Resume {
   String education;
   List<Educational> educational = [];
   int id;
-  int marriage;
+  int marriage = 0;
   String nation;
   String origin;
   String sos_name;

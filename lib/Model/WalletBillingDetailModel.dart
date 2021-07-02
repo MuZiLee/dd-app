@@ -1,11 +1,12 @@
 
 class WalletBillingDetailModel {
     String amount;
-    String amount_type;
+    bool amount_type;
     String balance;
     String create_time;
     String deduction;
     String egg_coin;
+    String total_egg;
     String egg_amount;
     Etype etype;
     int id;
@@ -15,18 +16,21 @@ class WalletBillingDetailModel {
     int uid;
     String update_time;
     int wid;
+    String title;
 
-    WalletBillingDetailModel({this.amount, this.egg_amount, this.amount_type, this.balance, this.create_time, this.deduction, this.egg_coin, this.etype, this.id, this.single_number, this.status, this.tid, this.uid, this.update_time, this.wid});
+    WalletBillingDetailModel({this.amount, this.title, this.egg_amount, this.total_egg, this.amount_type, this.balance, this.create_time, this.deduction, this.egg_coin, this.etype, this.id, this.single_number, this.status, this.tid, this.uid, this.update_time, this.wid});
 
     factory WalletBillingDetailModel.fromJson(Map<String, dynamic> json) {
+
         return WalletBillingDetailModel(
             amount: json['amount'],
             egg_amount: json['egg_amount'],
-            amount_type: json['amount_type'],
+            amount_type: json['amount_type'] == 1 ? true : false,
             balance: json['balance'],
             create_time: json['create_time'],
             deduction: json['deduction'],
             egg_coin: json['egg_coin'],
+            total_egg: json['total_egg'],
             etype: json['etype'] != null ? Etype.fromJson(json['etype']) : null,
             id: json['id'],
             single_number: json['single_number'],
@@ -35,6 +39,7 @@ class WalletBillingDetailModel {
             uid: json['uid'],
             update_time: json['update_time'],
             wid: json['wid'],
+            title: json['title'],
         );
     }
 
@@ -47,6 +52,7 @@ class WalletBillingDetailModel {
         data['create_time'] = this.create_time;
         data['deduction'] = this.deduction;
         data['egg_coin'] = this.egg_coin;
+        data['total_egg'] = this.total_egg;
         data['id'] = this.id;
         data['single_number'] = this.single_number;
         data['status'] = this.status;
@@ -54,6 +60,7 @@ class WalletBillingDetailModel {
         data['uid'] = this.uid;
         data['update_time'] = this.update_time;
         data['wid'] = this.wid;
+        data['title'] = this.title;
         if (this.etype != null) {
             data['etype'] = this.etype.toJson();
         }

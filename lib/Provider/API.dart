@@ -1,11 +1,11 @@
 
 import 'dart:convert';
 
-import 'package:one/Controller/Login/LoginViewController.dart';
-import 'package:one/Model/AdModel.dart';
-import 'package:one/Provider/SBRequest/SBRequest.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
-import 'package:one/utils/zeus_kit/utils/zk_random_util.dart';
+import 'package:demo2020/Controller/Login/LoginViewController.dart';
+import 'package:demo2020/Model/AdModel.dart';
+import 'package:demo2020/Provider/SBRequest/SBRequest.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_random_util.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:nav_router/nav_router.dart';
@@ -33,9 +33,12 @@ class API extends ChangeNotifier {
     };
     SBResponse response = await getResponse(url, arguments: arguments);
     var ads = [];
-    response.data.map((item){
-       ads.add(AdModel.fromJson(item));
-    }).toList();
+    if (response?.data != null) {
+      response?.data?.map((item){
+        ads.add(AdModel.fromJson(item));
+      })?.toList();
+    }
+
     if (type == 1 && ads.length > 0) {
       bannerAdlist = ads;
     }

@@ -1,12 +1,12 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:one/Model/DividendModel.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/DividendManager.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/Bases/BaseScaffold.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/CardSeries/CardRefresherListView.dart';
+import 'package:demo2020/Model/DividendModel.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/DividendManager.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherListView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -25,7 +25,7 @@ class _StrategicDividendViewControllerState extends State<StrategicDividendViewC
 
   List commissionlist = [];
   _onRefresh() async {
-    commissionlist = await DividendManager.getEnterpriseCommission(rid: Account.strategic_alliance);
+    commissionlist = await DividendManager.getEnterpriseCommission(Account.strategic_alliance);
 
     setState(() {
 

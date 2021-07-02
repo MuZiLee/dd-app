@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:one/Views/MyBehavior.dart';
-import 'package:one/Views/SBImage.dart';
+import 'package:demo2020/Views/MyBehavior.dart';
+import 'package:demo2020/Views/SBImage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -67,21 +67,24 @@ class CardRefresherGridViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
+      width: MediaQuery.of(context).size.width / 4,
+      height: MediaQuery.of(context).size.width / 4,
+      // ignore: deprecated_member_use
       child: FlatButton(
         color: Colors.transparent,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             this.url.contains("http")
-                ? SBImage(url: this.url)
+                ? SBImage(url: this.url, fit: BoxFit.fitWidth, width: MediaQuery.of(context).size.width / 4,)
                 : Image.asset(
               this.url,
               width: 28,
               height: 28,
             ),
-            SizedBox(
-              height: 10.0,
-            ),
+            // SizedBox(
+            //   height: 10.0,
+            // ),
             Center(
               child: Text(this.title,
                   style: TextStyle(fontSize: 12.0),

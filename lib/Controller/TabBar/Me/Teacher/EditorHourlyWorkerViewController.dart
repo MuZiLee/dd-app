@@ -1,16 +1,18 @@
 import 'package:date_format/date_format.dart';
-import 'package:one/Model/EventsPaySlipHourlyWorker.dart';
-import 'package:one/Model/FactoryStaff.dart';
-import 'package:one/Model/PartenerPvivot.dart';
-import 'package:one/Model/User.dart';
-import 'package:one/Provider/PaySlipManager.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/Bases/BaseScaffold.dart';
-import 'package:one/Views/SBImage.dart';
-import 'package:one/Views/ThemeButton.dart';
+import 'package:demo2020/Model/EventsPaySlipHourlyWorker.dart';
+import 'package:demo2020/Model/FactoryStaff.dart';
+import 'package:demo2020/Model/PartenerPvivot.dart';
+import 'package:demo2020/Model/User.dart';
+import 'package:demo2020/Provider/PaySlipManager.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/SBImage.dart';
+import 'package:demo2020/Views/ThemeButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class EditorHourlyWorkerViewController extends StatefulWidget {
 //  Teacher teacher;
@@ -24,17 +26,35 @@ class EditorHourlyWorkerViewController extends StatefulWidget {
       _EditorHourlyWorkerViewControllerState();
 }
 
-class _EditorHourlyWorkerViewControllerState extends State<EditorHourlyWorkerViewController> {
+class _EditorHourlyWorkerViewControllerState
+    extends State<EditorHourlyWorkerViewController> {
+  RefreshController refreshController = RefreshController(initialRefresh: true);
+
+  var hour = 0;
+
+  /**
+   * TODO： 总工时
+   */
+  _onRefresh() async {
+    hour = await PaySlipManager.findHour(widget.hourlyWorker.uid);
+    refreshController.refreshCompleted();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
       title: "小时工工资条",
-      child: GestureDetector(
-        child: SingleChildScrollView(
-          child: _build_Hourly_work(),
+      child: SmartRefresher(
+        header: MaterialClassicHeader(distance: 80.0),
+        controller: refreshController,
+        onRefresh: _onRefresh,
+        child: GestureDetector(
+          child: SingleChildScrollView(
+            child: _build_Hourly_work(),
+          ),
+          onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
         ),
-        onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
       ),
     );
   }
@@ -44,8 +64,7 @@ class _EditorHourlyWorkerViewControllerState extends State<EditorHourlyWorkerVie
       print(widget.hourlyWorker.actual_salary);
 
       //总工时
-      double total_working_hours =
-          double.parse(widget.hourlyWorker.total_working_hours);
+      int total_working_hours = hour;
       //员工单价
       double employee_unit_price =
           double.parse(widget.hourlyWorker.employee_unit_price);
@@ -77,10 +96,12 @@ class _EditorHourlyWorkerViewControllerState extends State<EditorHourlyWorkerVie
           double.parse(widget.hourlyWorker.sign_unit_price);
       //业务员提成 元
       double salesperson_commission =
-          double.parse(widget.hourlyWorker.salesperson_commission) * total_working_hours;
+          double.parse(widget.hourlyWorker.salesperson_commission) *
+              total_working_hours;
       //驻场老师提成 元
       double resident_teacher_commission =
-          double.parse(widget.hourlyWorker.resident_teacher_commission) * total_working_hours;
+          double.parse(widget.hourlyWorker.resident_teacher_commission) *
+              total_working_hours;
 
       // 总收益 = 签单价 * 总工时 - 员工工资 - 业务员提成 -  驻场老师提成 - 税费。（他剩下的我们都叫总收益）
       double total_revenue = (sign_unit_price * total_working_hours) -
@@ -181,7 +202,7 @@ class _EditorHourlyWorkerViewControllerState extends State<EditorHourlyWorkerVie
                         fontSize: 12,
                         decoration: TextDecoration.none),
                     textAlign: TextAlign.center),
-                Text("${widget.hourlyWorker.total_working_hours}小时",
+                Text("${total_working_hours}小时",
                     style: TextStyle(
                         color: Colors.grey,
                         fontWeight: FontWeight.normal,
@@ -219,7 +240,7 @@ class _EditorHourlyWorkerViewControllerState extends State<EditorHourlyWorkerVie
                         decoration: TextDecoration.none),
                     textAlign: TextAlign.center),
                 _inputAction(
-                    "其他加项", "${widget.hourlyWorker.other_deductions}元"),
+                    "其他加项", "${widget.hourlyWorker.other_deductions}元", color: Colors.blue),
                 _inputAction("其他加项备注", "备注",
                     color: Colors.grey, keyboardType: TextInputType.text),
               ])
@@ -230,7 +251,7 @@ class _EditorHourlyWorkerViewControllerState extends State<EditorHourlyWorkerVie
             margin: EdgeInsets.only(left: 10.0),
             child: Text('减项',
                 style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.red,
                     fontWeight: FontWeight.normal,
                     fontSize: 12,
                     decoration: TextDecoration.none),
@@ -247,7 +268,7 @@ class _EditorHourlyWorkerViewControllerState extends State<EditorHourlyWorkerVie
               TableRow(children: [
                 Text('税费',
                     style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.red,
                         fontWeight: FontWeight.normal,
                         fontSize: 12,
                         decoration: TextDecoration.none),
@@ -255,7 +276,7 @@ class _EditorHourlyWorkerViewControllerState extends State<EditorHourlyWorkerVie
                 _inputAction("税费", "${widget.hourlyWorker.taxes}元"),
                 Text('保险费',
                     style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.red,
                         fontWeight: FontWeight.normal,
                         fontSize: 12,
                         decoration: TextDecoration.none),
@@ -362,28 +383,31 @@ class _EditorHourlyWorkerViewControllerState extends State<EditorHourlyWorkerVie
             ],
           ),
           SizedBox(height: 64.0),
-          widget.hourlyWorker.status == 0 ? ThemeButton(
-            "提交",
-            onPressed: () async {
-              var data = widget.hourlyWorker.toJson();
-              data['type'] = "小时工工资条";
+          widget.hourlyWorker.status == 0
+              ? ThemeButton(
+                  "提交",
+                  onPressed: () async {
+                    var data = widget.hourlyWorker.toJson();
+                    data['type'] = "小时工工资条";
 
-              PartenerPvivot partenerPvivot = widget.hourlyWorker.staff.partenerPvivot;
-              data['event'] = {
-                'type': "小时工工资条",
-                'tuid': widget.hourlyWorker.teacher.uid,
-                'fid': widget.hourlyWorker.staff.fid,
-                'jid': widget.hourlyWorker.staff.jid,
-                'uid': widget.hourlyWorker.staff.uid,
-                'pid': partenerPvivot.pid,
-                'sid': partenerPvivot.sid
-              };
+                    PartenerPvivot partenerPvivot =
+                        widget.hourlyWorker.staff.partenerPvivot;
+                    data['event'] = {
+                      'type': "小时工工资条",
+                      'tuid': widget.hourlyWorker.teacher.uid,
+                      'fid': widget.hourlyWorker.staff.fid,
+                      'jid': widget.hourlyWorker.staff.jid,
+                      'uid': widget.hourlyWorker.staff.uid,
+                      'pid': partenerPvivot.pid,
+                      'sid': partenerPvivot.sid
+                    };
 
-              if (await PaySlipManager.addPaySlip(data)) {
-                pop();
-              }
-            },
-          ) : Container()
+                    if (await PaySlipManager.addPaySlip(data)) {
+                      pop();
+                    }
+                  },
+                )
+              : Container()
         ],
       );
     } else {
@@ -403,7 +427,7 @@ class _EditorHourlyWorkerViewControllerState extends State<EditorHourlyWorkerVie
    * 员工工资  =  (总工时 * 员工单价) + 补助(备注) - 借款 - 其他扣款(备注) - 保险费
    */
   _inputAction(String title, String placeholder,
-      {Color color = Colors.blue,
+      {Color color = Colors.red,
       TextInputType keyboardType = TextInputType.multiline}) {
     return CupertinoTextField(
       placeholder: placeholder,
@@ -418,16 +442,20 @@ class _EditorHourlyWorkerViewControllerState extends State<EditorHourlyWorkerVie
       style: TextStyle(fontSize: 12),
       onChanged: (value) {
         if (title == "其他加项") {
-          widget.hourlyWorker.other_additions = double.parse(value.length > 0 ? value : "0.0").toString();
+          widget.hourlyWorker.other_additions =
+              double.parse(value.length > 0 ? value : "0.0").toString();
         }
         if (title == "其他加项备注") {
-          widget.hourlyWorker.other_additions_remarks = value.length > 0 ? value : "暂无";
+          widget.hourlyWorker.other_additions_remarks =
+              value.length > 0 ? value : "暂无";
         }
         if (title == "其他扣款") {
-          widget.hourlyWorker.other_deductions = double.parse(value.length > 0 ? value : "0.0").toString();
+          widget.hourlyWorker.other_deductions =
+              double.parse(value.length > 0 ? value : "0.0").toString();
         }
         if (title == "其他扣款备注") {
-          widget.hourlyWorker.other_deductions_remarks = value.length > 0 ? value : "暂无";
+          widget.hourlyWorker.other_deductions_remarks =
+              value.length > 0 ? value : "暂无";
         }
 
         if (title.contains("保险费")) {
@@ -447,7 +475,6 @@ class _EditorHourlyWorkerViewControllerState extends State<EditorHourlyWorkerVie
       },
     );
   }
-
 
   _border() {
     //表格边框样式

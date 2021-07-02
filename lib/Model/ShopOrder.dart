@@ -1,6 +1,6 @@
 
-import 'package:one/Model/EventsStaff.dart';
-import 'package:one/Model/ShopProductsModel.dart';
+import 'package:demo2020/Model/EventsStaff.dart';
+import 'package:demo2020/Model/ShopProductsModel.dart';
 
 class ShopOrder {
     String addid;

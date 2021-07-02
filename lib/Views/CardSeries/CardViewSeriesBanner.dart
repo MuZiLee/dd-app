@@ -1,5 +1,5 @@
 
-import 'package:one/Views/SBImage.dart';
+import 'package:demo2020/Views/SBImage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';

@@ -1,15 +1,15 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:one/Provider/StaffManager.dart';
-import 'package:one/Views/Bases/BaseScaffold.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesNumber.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesText.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesTextView.dart';
-import 'package:one/Views/MyBehavior.dart';
-import 'package:one/Views/SBImage.dart';
-import 'package:one/config.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Provider/StaffManager.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesNumber.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesText.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesTextView.dart';
+import 'package:demo2020/Views/MyBehavior.dart';
+import 'package:demo2020/Views/SBImage.dart';
+import 'package:demo2020/config.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_luban/flutter_luban.dart';
@@ -84,7 +84,7 @@ class _reimbursementViewControllerState
           children: <Widget>[
             CardViewSeriesText(
               title: "事件类型",
-              subtitle: "请假",
+              subtitle: "报销",
               enabled: false,
             ),
             CardViewSeriesNumber(
@@ -141,6 +141,7 @@ class _reimbursementViewControllerState
                             delegate: SliverChildBuilderDelegate(
                               (_, int index) {
                                 String url = images[index];
+                                // ignore: deprecated_member_use
                                 return FlatButton(
                                   color: Colors.white,
                                   child: SBImage(
@@ -153,7 +154,7 @@ class _reimbursementViewControllerState
                                       context: context,
                                       builder: (context) {
                                         return CupertinoActionSheet(
-                                          title: Text('上传头像', style: TextStyle(fontSize: 14)), //标题
+                                          title: Text('报销凭证', style: TextStyle(fontSize: 14)), //标题
                                           message: Text('请选择获取照片方式'), //提示内容
                                           actions: <Widget>[
                                             //操作按钮集合

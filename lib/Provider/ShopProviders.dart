@@ -1,8 +1,8 @@
 
 
-import 'package:one/Model/ShopCategory.dart';
-import 'package:one/Model/ShopProductsModel.dart';
-import 'package:one/Provider/SBRequest/SBRequest.dart';
+import 'package:demo2020/Model/ShopCategory.dart';
+import 'package:demo2020/Model/ShopProductsModel.dart';
+import 'package:demo2020/Provider/SBRequest/SBRequest.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ovprogresshud/progresshud.dart';
 
@@ -44,6 +44,24 @@ class ShopProviders extends ChangeNotifier {
     }).toList();
 
     return goodslist;
+  }
+
+  /**
+   * 搜索职位
+   */
+  static searchGoods(String keyword,{int page = 1, int limit = 15}) async {
+    var url = "shop/searchGoods";
+    var arguments = {
+      "keyword": keyword,
+      "page": page,
+      "limit": limit,
+    };
+    SBResponse response = await SBRequest.post(url, arguments: arguments);
+    List jobs = [];
+    response.data.map((json) {
+      jobs.add(ShopProductsModel.fromJson(json));
+    }).toList();
+    return jobs;
   }
 
 

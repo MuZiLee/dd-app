@@ -1,7 +1,7 @@
-import 'package:one/Controller/TabBar/Me/Wallet/BankCardViewController.dart';
-import 'package:one/Controller/TabBar/Me/Wallet/ChangeWithdrawalViewController.dart';
-import 'package:one/Provider/WalletManager.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Controller/TabBar/Me/Wallet/BankCardViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Wallet/ChangeWithdrawalViewController.dart';
+import 'package:demo2020/Provider/WalletManager.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
 

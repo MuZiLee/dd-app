@@ -1,9 +1,9 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import 'package:one/Views/card_settings/helpers/platform_functions.dart';
-import 'package:one/Views/card_settings/widgets/action_fields/card_settings_button.dart';
-import 'package:one/Views/card_settings/widgets/card_settings_widget.dart';
+import 'package:demo2020/Views/card_settings/helpers/platform_functions.dart';
+import 'package:demo2020/Views/card_settings/widgets/action_fields/card_settings_button.dart';
+import 'package:demo2020/Views/card_settings/widgets/card_settings_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';

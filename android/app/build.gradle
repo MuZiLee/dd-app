@@ -23,10 +23,26 @@ if (flutterVersionName == null) {
 
 apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
-apply from: "../MobSDK.gradle"
+//apply from: '../mobsdk.gradle'
 
 android {
     compileSdkVersion 30
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId "com.sanshengit.one"
+        minSdkVersion 19
+        targetSdkVersion 30
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        manifestPlaceholders = [
+                LOCATION_APP_KEY : "53bb4c7f3a9c554d38d9c41aba83359b", /// amap ApiKey
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "79778172c79dd53e94bb6ae5", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+
+        ]
+    }
 
     buildTypes {
         release {
@@ -35,29 +51,6 @@ android {
             signingConfig signingConfigs.debug
         }
     }
-
-    defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.dandankj.one"
-        minSdkVersion 17
-        targetSdkVersion 30
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
-        manifestPlaceholders = [
-                LOCATION_APP_KEY : "e262b6acbcfd9ee6069ac854c8c61b4d", /// amap ApiKey
-                JPUSH_PKGNAME : applicationId,
-                JPUSH_APPKEY : "021d51837679eb31e1460d04", //JPush上注册的包名对应的appkey.
-                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
-
-        ]
-    }
-//    packagingOptions {
-//        exclude 'lib/arm64-v8a/libgojni.so'
-//        exclude 'lib/x86/libgojni.so'
-//        exclude 'lib/x86_64/libgojni.so'
-//    }
-
-
 }
 
 flutter {

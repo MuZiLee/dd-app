@@ -1,17 +1,17 @@
-import 'package:one/Controller/TabBar/Me/Wallet/BankCardViewController.dart';
-import 'package:one/Controller/TabBar/Me/Wallet/BillViewController.dart';
-import 'package:one/Controller/TabBar/Me/Wallet/CommissionWithdrawalViewController.dart';
-import 'package:one/Controller/TabBar/Me/Wallet/MoneyViewController.dart';
-import 'package:one/Controller/TabBar/Me/Wallet/PayCodeVerificationViewController.dart';
-import 'package:one/Controller/TabBar/Me/Wallet/VirtualViewController.dart';
-import 'package:one/Controller/TabBar/Me/Wallet/WageTransferViewController.dart';
-import 'package:one/Controller/TabBar/Me/WorkerServer/AdvancePayments/AdvancePaymentsViewController.dart';
-import 'package:one/Model/WalletModel.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/WalletManager.dart';
-import 'package:one/Views/CardSeries/CardHeaderTip.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Controller/TabBar/Me/Wallet/BankCardViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Wallet/BillViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Wallet/CommissionWithdrawalViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Wallet/MoneyViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Wallet/PayCodeVerificationViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Wallet/VirtualViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Wallet/WageTransferViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/WorkerServer/AdvancePayments/AdvancePaymentsViewController.dart';
+import 'package:demo2020/Model/WalletModel.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/WalletManager.dart';
+import 'package:demo2020/Views/CardSeries/CardHeaderTip.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
@@ -46,6 +46,7 @@ class _MyWalletViewControllerState extends State<MyWalletViewController> {
     );
     slivers.add(header);
 
+    var title = Account.user.owned;
 
     List items = [
       {"image":"images/member/wallet/icon-wallet-013.png", "title":"提现"},
@@ -59,9 +60,9 @@ class _MyWalletViewControllerState extends State<MyWalletViewController> {
     }
 
     if (Account.user.owned.contains(Account.salesman)) {
-      items.add({"image":"images/member/report.png", "title":"业务提成"});
+      items.add({"image":"images/member/resume.png", "title":"业务提成"});
     }
-    if (Account.user.owned.contains(Account.salesman)) {
+    if (Account.user.owned.contains(Account.resident_teacher)) {
       items.add({"image":"images/member/reimbursement.png", "title":"驻厂老师提成"});
     }
     if (Account.user.owned.contains(Account.junior_partner)) {

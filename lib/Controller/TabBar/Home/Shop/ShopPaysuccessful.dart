@@ -1,6 +1,6 @@
 
-import 'package:one/Views/404/SuccessfulView.dart';
-import 'package:one/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Views/404/SuccessfulView.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
 import 'package:flutter/cupertino.dart';
 
 class ShopPaysuccessful extends StatefulWidget {

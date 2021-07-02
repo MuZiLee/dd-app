@@ -25,7 +25,7 @@ THE SOFTWARE.
 */
 
 
-import 'package:one/Views/card_settings/flutter_multi_formatter/formatters/masked_input_formatter.dart';
+import 'package:demo2020/Views/card_settings/flutter_multi_formatter/formatters/masked_input_formatter.dart';
 
 class CreditCardCvcInputFormatter extends MaskedInputFormater {
   CreditCardCvcInputFormatter() : super('0000');

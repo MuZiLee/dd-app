@@ -1,5 +1,5 @@
 
-import 'package:one/Model/EventsStaff.dart';
+import 'package:demo2020/Model/EventsStaff.dart';
 
 class WalletModel {
     String balance;
@@ -20,7 +20,7 @@ class WalletModel {
             egg_coin: double.parse(json['egg_coin']).toString(),
             id: json['id'], 
             logs: json['logs'] != null ? (json['logs'] as List).map((i) => WLog.fromJson(i)).toList() : null,
-            uid: json['uid'], 
+            uid: json['uid'].toString(),
             update_time: json['update_time'], 
             user: json['user'] != null ? EUser.fromJson(json['user']) : null,
         );
@@ -46,7 +46,7 @@ class WalletModel {
 
 class WLog {
     String amount;
-    String amount_type;
+    bool amount_type;
     String balance;
     String create_time;
     String deduction;
@@ -65,7 +65,7 @@ class WLog {
     factory WLog.fromJson(Map<String, dynamic> json) {
         return WLog(
             amount: json['amount'], 
-            amount_type: json['amount_type'], 
+            amount_type: json['amount_type'] == 1 ? true : false,
             balance: json['balance'], 
             create_time: json['create_time'], 
             deduction: json['deduction'], 

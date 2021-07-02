@@ -1,13 +1,13 @@
 
 import 'package:common_utils/common_utils.dart';
-import 'package:one/Controller/TabBar/Chat/ConversationViewController.dart';
-import 'package:one/Model/ShopOrder.dart';
-import 'package:one/Provider/ShopManager.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/CardSeries/CardShowActionSheetController.dart';
-import 'package:one/Views/SBImage.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Controller/TabBar/Chat/ConversationViewController.dart';
+import 'package:demo2020/Model/ShopOrder.dart';
+import 'package:demo2020/Provider/ShopManager.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/CardSeries/CardShowActionSheetController.dart';
+import 'package:demo2020/Views/SBImage.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';

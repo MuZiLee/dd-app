@@ -9,15 +9,15 @@
 //
 
 
-import 'package:one/Controller/TabBar/Me/MyResume/EducationExperience/AddEducationExperienceViewController.dart';
-import 'package:one/Model/Resume.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/ResumeManager.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/CardSeries/CardRefresherListView.dart';
-import 'package:one/Views/ListViewCard.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Controller/TabBar/Me/MyResume/EducationExperience/AddEducationExperienceViewController.dart';
+import 'package:demo2020/Model/Resume.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/ResumeManager.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherListView.dart';
+import 'package:demo2020/Views/ListViewCard.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
@@ -26,8 +26,9 @@ import 'package:ovprogresshud/progresshud.dart';
 /// 教育经历
 class EducationExperienceViewController extends StatefulWidget {
 
-
-  EducationExperienceViewController();
+  bool isShowAdd = true;
+  String phone = Account.user.phone;
+  EducationExperienceViewController(this.isShowAdd, {this.phone});
 
   @override
   _EducationExperienceViewControllerState createState() =>
@@ -39,7 +40,7 @@ class _EducationExperienceViewControllerState extends State<EducationExperienceV
   static List<Educational> educationlList = [];
 
   _onRefresh() async{
-    Resume resume = await ResumeManager.get();
+    Resume resume = await ResumeManager.get(widget.phone);
     educationlList = resume.educational;
     setState(() {
 
@@ -53,7 +54,7 @@ class _EducationExperienceViewControllerState extends State<EducationExperienceV
     return BaseScaffold(
         title: "教育经历",
         actions: [
-          Container(
+          widget.isShowAdd == true ? Container(
             padding: EdgeInsets.all(10),
             child: RaisedButton(
               color: selectedIconColor,
@@ -66,7 +67,7 @@ class _EducationExperienceViewControllerState extends State<EducationExperienceV
 
               },
             ),
-          )
+          ) : Container()
         ],
       child: CardRefresher(
         onRefresh: _onRefresh,

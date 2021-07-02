@@ -1,7 +1,7 @@
 
-import 'package:one/CellItem.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/CellItem.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/material.dart';
 
 class WorkerServerViewController extends StatefulWidget {
@@ -52,7 +52,7 @@ class _WorkerServerViewControllerState extends State<WorkerServerViewController>
     }
 
     return BaseScaffold(
-      title: "工人服务",
+      title: "工作流",
       child: ListView(
         children: children,
       ),

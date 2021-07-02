@@ -9,23 +9,25 @@
 //
 
 
-import 'package:one/Controller/TabBar/Me/Preferences/AboutUs/AboutUsViewController.dart';
-import 'package:one/Controller/TabBar/Me/Preferences/AddGoods/AddGoodsViewController.dart';
-import 'package:one/Controller/TabBar/Me/Preferences/Feedback/FeedbackViewController.dart';
-import 'package:one/Controller/TabBar/Me/Preferences/MyGoods/MyGoodsViewController.dart';
-import 'package:one/Controller/TabBar/Me/Preferences/MyOrder/MyOrderViewController.dart';
-import 'package:one/Controller/TabBar/Me/Preferences/SalesRecord/SalesRecordViewController.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Views/CardSeries/CardShowActionSheetController.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesHeader.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesRight.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesText.dart';
-import 'package:one/Views/ThemeButton.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+
+import 'package:demo2020/Controller/TabBar/Me/Preferences/AboutUs/AboutUsViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Preferences/AddGoods/AddGoodsViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Preferences/Feedback/FeedbackViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Preferences/MyGoods/MyGoodsViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Preferences/MyOrder/MyOrderViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Preferences/SalesRecord/SalesRecordViewController.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Views/CardSeries/CardShowActionSheetController.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesHeader.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesRight.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesText.dart';
+import 'package:demo2020/Views/ThemeButton.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Views/card_settings/card_settings.dart';
+import 'package:demo2020/Views/card_settings/widgets/card_settings_panel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
-import 'package:one/Views/card_settings/card_settings.dart';
 
 /// 系统设置
 class PreferencesViewController extends StatefulWidget {
@@ -69,10 +71,8 @@ class _PreferencesViewControllerState extends State<PreferencesViewController> {
               children: <Widget>[
                 Expanded(
                   flex: 5,
-                  child: CardSettings(
-                    cardElevation: 0.0,
-                    // padding: 0.0,
-                    children: <Widget>[
+                  child: Column(
+                    children: [
                       CardViewSeriesRight(
                         title: "我的商品",
                         subtitle: "销售中的商品",
@@ -125,7 +125,6 @@ class _PreferencesViewControllerState extends State<PreferencesViewController> {
                           routePush(AboutUsViewController());
                         },
                       )
-
                     ],
                   ),
                 ),

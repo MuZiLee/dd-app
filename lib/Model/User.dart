@@ -1,7 +1,7 @@
 
-import 'package:one/Model/JobModel.dart';
-import 'package:one/Model/SigingInformation.dart';
-import 'package:one/config.dart';
+import 'package:demo2020/Model/JobModel.dart';
+import 'package:demo2020/Model/SigingInformation.dart';
+import 'package:demo2020/config.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
 
 class User {

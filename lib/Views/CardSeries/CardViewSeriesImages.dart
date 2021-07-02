@@ -1,10 +1,7 @@
-import 'dart:io';
 
-import 'package:one/Views/CardSeries/CardRefresherGridView.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherGridView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 
 class CardViewSeriesImages extends StatefulWidget {
   final String title;
@@ -105,10 +102,10 @@ class _CardViewSeriesImagesState extends State<CardViewSeriesImages> {
 
   Future<void> retrieveLostData(int index) async {
 
-    File image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    if (image == null) {
-      return;
-    }
+    // File image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    // if (image == null) {
+    //   return;
+    // }
 
 
 

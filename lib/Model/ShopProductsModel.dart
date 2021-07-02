@@ -1,6 +1,6 @@
 
-import 'package:one/Model/EventsStaff.dart';
-import 'package:one/config.dart';
+import 'package:demo2020/Model/EventsStaff.dart';
+import 'package:demo2020/config.dart';
 
 class ShopProductsModel {
     String create_time;

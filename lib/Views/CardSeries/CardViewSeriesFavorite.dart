@@ -13,7 +13,7 @@ class CardViewSeriesFavorite extends StatefulWidget {
   final String image;
   final String title;
   final String subtitle;
-  String timestamp;
+  // String timestamp;
   final String frome;
   final int type;
   final String id;
@@ -23,7 +23,7 @@ class CardViewSeriesFavorite extends StatefulWidget {
     this.image,
     this.title = "Title",
     this.subtitle = "subtitle",
-    this.timestamp,
+    // this.timestamp,
     this.frome,
     this.type = 2,
     this.onTap,
@@ -96,13 +96,13 @@ class _CardViewSeriesFavoriteState extends State<CardViewSeriesFavorite> {
                 ),
                 Row(
                   children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        widget.timestamp,
-                        style: TextStyle(color: Colors.black38, fontSize: 10),
-                      ),
-                    ),
+                    // Container(
+                    //   padding: EdgeInsets.all(10),
+                    //   child: Text(
+                    //     widget.timestamp,
+                    //     style: TextStyle(color: Colors.black38, fontSize: 10),
+                    //   ),
+                    // ),
 
                     Expanded(
                       child: Container(

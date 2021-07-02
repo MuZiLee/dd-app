@@ -1,13 +1,14 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:one/Model/EventsPaySlip.dart';
-import 'package:one/Model/EventsPaySlipAgent.dart';
-import 'package:one/Provider/PaySlipManager.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/Bases/BaseScaffold.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/CardSeries/CardRefresherListView.dart';
-import 'package:one/Views/CardSeries/CardShowActionSheetController.dart';
+import 'package:demo2020/Model/EventsPaySlip.dart';
+import 'package:demo2020/Model/EventsPaySlipAgent.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/PaySlipManager.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherListView.dart';
+import 'package:demo2020/Views/CardSeries/CardShowActionSheetController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
@@ -20,8 +21,11 @@ class MyPaySlipViewController extends StatefulWidget {
 
 class _MyPaySlipViewControllerState extends State<MyPaySlipViewController> {
 
+  int hour = 0;
+
   _onRefresh() async {
     myPaySliplist = await PaySlipManager.myPaySliplist();
+    hour = await PaySlipManager.findHour(Account.user.id);
     _refreshController.refreshFailed();
     setState(() {
 
@@ -30,6 +34,7 @@ class _MyPaySlipViewControllerState extends State<MyPaySlipViewController> {
 
   @override
   Widget build(BuildContext context) {
+
     return BaseScaffold(
       title: "我的工资条",
       child: CardRefresher(
@@ -118,7 +123,7 @@ class _MyPaySlipViewControllerState extends State<MyPaySlipViewController> {
                         fontSize: 12,
                         decoration: TextDecoration.none),
                     textAlign: TextAlign.center),
-                Text("${paySlip.slip.total_working_hours}小时",
+                Text("${hour}小时",
                     style: TextStyle(
                         color: Colors.grey,
                         fontWeight: FontWeight.normal,

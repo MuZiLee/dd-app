@@ -1,13 +1,13 @@
 
-import 'package:one/Controller/TabBar/Home/Announcement/ReadDetailsViewController.dart';
-import 'package:one/Model/AnnouncementModel.dart';
-import 'package:one/Model/ArticlesModel.dart';
-import 'package:one/Provider/ArticleManager.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/CardSeries/CardRefresherListView.dart';
-import 'package:one/Views/SBImage.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Controller/TabBar/Home/Announcement/ReadDetailsViewController.dart';
+import 'package:demo2020/Model/AnnouncementModel.dart';
+import 'package:demo2020/Model/ArticlesModel.dart';
+import 'package:demo2020/Provider/ArticleManager.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherListView.dart';
+import 'package:demo2020/Views/SBImage.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
 

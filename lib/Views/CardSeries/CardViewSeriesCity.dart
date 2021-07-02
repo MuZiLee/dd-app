@@ -1,6 +1,6 @@
 
 
-import 'package:one/Views/CardSeries/PickerTool/flutter_location_picker.dart';
+import 'package:demo2020/Views/CardSeries/PickerTool/flutter_location_picker.dart';
 import 'package:flutter/material.dart';
 
 class CardViewSeriesCity extends StatefulWidget {

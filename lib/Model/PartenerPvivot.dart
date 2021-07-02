@@ -1,4 +1,4 @@
-import 'package:one/Model/StrategicAlliance.dart';
+import 'package:demo2020/Model/StrategicAlliance.dart';
 
 class PartenerPvivot {
   String create_time;

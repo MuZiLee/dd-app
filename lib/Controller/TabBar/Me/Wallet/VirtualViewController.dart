@@ -1,6 +1,6 @@
 
-import 'package:one/Model/WalletModel.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Model/WalletModel.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/material.dart';
 
 /// 蛋币

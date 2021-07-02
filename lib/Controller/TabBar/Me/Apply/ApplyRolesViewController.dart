@@ -1,14 +1,14 @@
-import 'package:one/Model/JobModel.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/EventsManager.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesCity.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesHeader.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesNumber.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesText.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesTextView.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
-import 'package:one/Views/card_settings/card_settings.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Model/JobModel.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/EventsManager.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesCity.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesHeader.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesNumber.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesText.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesTextView.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Views/card_settings/widgets/card_settings_panel.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/material.dart';
 
 /// 申请
@@ -29,7 +29,6 @@ class _ApplyRolesViewControllerState extends State<ApplyRolesViewController> {
   Widget build(BuildContext context) {
     return BaseScaffold(
       title: widget.appleByUsable,
-      centerTitle: false,
       child: buildCardSettings(),
       actions: <Widget>[
         Container(
@@ -135,9 +134,10 @@ class _ApplyRolesViewControllerState extends State<ApplyRolesViewController> {
           remark = value;
         }));
 
-    return CardSettings(
-      cardElevation: 0.0,
-      children: children,
+    return SingleChildScrollView(
+      child: Column(
+        children: children,
+      ),
     );
   }
 

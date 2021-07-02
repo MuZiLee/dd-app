@@ -1,5 +1,5 @@
 
-import 'package:one/config.dart';
+import 'package:demo2020/config.dart';
 
 class ShopNavitems {
     String icon;

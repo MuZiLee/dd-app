@@ -8,15 +8,16 @@
 //  版权所有 © 2019。 保留所有权利
 //
 
-import 'package:one/Controller/TabBar/Me/Personal/EditorRealnameViewController.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesAvatar.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesDate.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesNumber.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesRight.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesSwitch.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesText.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Controller/TabBar/Me/Personal/EditorRealnameViewController.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesAvatar.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesDate.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesNumber.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesRight.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesSwitch.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesText.dart';
+import 'package:demo2020/Views/SBImage.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
@@ -68,6 +69,7 @@ class _PersonalInfoViewControllerState extends State<PersonalInfoViewController>
                     }
                   },
                 ),
+
                 LinearProgressIndicator(
                   value: progressValue,
                   backgroundColor: Colors.white,

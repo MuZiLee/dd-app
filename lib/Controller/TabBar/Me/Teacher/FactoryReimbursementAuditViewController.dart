@@ -1,18 +1,21 @@
 
 import 'package:common_utils/common_utils.dart';
-import 'package:one/Controller/TabBar/Chat/ConversationViewController.dart';
-import 'package:one/Model/EventsStaff.dart';
-import 'package:one/Model/User.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/EventsManager.dart';
-import 'package:one/Provider/FactoryManager.dart';
-import 'package:one/Provider/IM.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/Bases/BaseScaffold.dart';
-import 'package:one/Views/CardSeries/CardRefresherListView.dart';
-import 'package:one/Views/CardSeries/CardShowActionSheetController.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesBottomSheet.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Controller/TabBar/Chat/ConversationViewController.dart';
+// import 'package:demo2020/Views/CardSeries/CardViewPictureBrowse.dart';
+import 'package:demo2020/Model/EventTeacherAudit.dart';
+import 'package:demo2020/Model/EventsStaff.dart';
+import 'package:demo2020/Model/User.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/EventsManager.dart';
+import 'package:demo2020/Provider/FactoryManager.dart';
+import 'package:demo2020/Provider/IM.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherListView.dart';
+import 'package:demo2020/Views/CardSeries/CardShowActionSheetController.dart';
+import 'package:demo2020/Views/CardSeries/CardViewPictureBrowse.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesBottomSheet.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
@@ -163,7 +166,7 @@ class _FactoryReimbursementAuditViewControllerState extends State<FactoryReimbur
                                                     padding: EdgeInsets.all(0.0),
                                                   ),
                                                   onTap: () {
-                                                    // routePush(CardViewPictureBrowse(event.images));
+                                                    routePush(CardViewPictureBrowse(event.images));
                                                   },
                                                 ),
                                               ),
@@ -295,7 +298,7 @@ class _FactoryReimbursementAuditViewControllerState extends State<FactoryReimbur
 
           //操作按钮集合
           CupertinoActionSheetAction(
-              child: Text('入职确认', style: TextStyle(fontSize: 14)),
+              child: Text('通过', style: TextStyle(fontSize: 14)),
               onPressed: () => _audit(eid, status: 1)
 
           ),

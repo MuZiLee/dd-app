@@ -1,9 +1,9 @@
 
-import 'package:one/Model/WalletBillingDetailModel.dart';
-import 'package:one/Provider/WalletManager.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/CardSeries/CardRefresherListView.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Model/WalletBillingDetailModel.dart';
+import 'package:demo2020/Provider/WalletManager.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherListView.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -28,7 +28,7 @@ class _BillViewControllerState extends State<BillViewController> {
         refreshController: _refreshController,
         onRefresh: _onRefresh,
         child: CardRefresherListView(
-          itemCount: detailslit.length,
+          itemCount: detailslit?.length > 0 ? detailslit?.length : 0,
           itemBuilder: (_, index) {
 
             WalletBillingDetailModel detail = detailslit[index];
@@ -41,18 +41,19 @@ class _BillViewControllerState extends State<BillViewController> {
                   Row(
                     children: [
                       Expanded(
-                        child: Text(detail.etype.title, style: TextStyle(fontSize: 13), textAlign: TextAlign.left),
+                        child: Text(detail.title, style: TextStyle(fontSize: 13), textAlign: TextAlign.left),
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.2,
-                        child: Text(detail.amount_type.contains("支出") ? "-${double.parse(detail.egg_amount)}个" : "${double.parse(detail.egg_amount)}个", style: TextStyle(fontSize: 13, color: detail.amount_type.contains("支出") ? Colors.red : Colors.black), textAlign: TextAlign.right),
+                        child: Text(detail.amount_type == false ? "-${double.parse(detail.egg_coin)}个" : "${double.parse(detail.egg_coin)}个", style: TextStyle(fontSize: 13), textAlign: TextAlign.right),
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.2,
-                        child: Text(detail.amount_type.contains("支出") ? "-${double.parse(detail.amount)}" : "¥${double.parse(detail.amount)}", style: TextStyle(fontSize: 13, color: detail.amount_type.contains("支出") ? Colors.red : Colors.black), textAlign: TextAlign.right),
+                        child: Text(detail.amount_type == false ? "￥-${double.parse(detail.amount)}" : "¥${double.parse(detail.amount)}", style: TextStyle(fontSize: 13), textAlign: TextAlign.right),
                       ),
                     ],
                   ),
+                  // 余额
                   Row(
                     children: [
                       Expanded(
@@ -60,7 +61,7 @@ class _BillViewControllerState extends State<BillViewController> {
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.2,
-                        child: Text("蛋币${double.parse(detail.egg_coin)}", style: TextStyle(fontSize: 10), textAlign: TextAlign.right),
+                        child: Text("剩余蛋币${double.parse(detail.total_egg)}", style: TextStyle(fontSize: 10), textAlign: TextAlign.right),
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.2,
@@ -86,6 +87,7 @@ class _BillViewControllerState extends State<BillViewController> {
   _onRefresh() async {
     _refreshController.refreshFailed();
     detailslit = await WalletManager.billingDetailslist();
+    print(detailslit);
     setState(() {
 
     });

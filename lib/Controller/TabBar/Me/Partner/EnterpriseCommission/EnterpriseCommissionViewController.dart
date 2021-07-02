@@ -1,16 +1,18 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:one/Model/DividendModel.dart';
-import 'package:one/Provider/DividendManager.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/Bases/BaseScaffold.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Model/BudgetEnterpriseCommission.dart';
+import 'package:demo2020/Model/DividendModel.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/DividendManager.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 /**
- * 企业佣金
+ * 初级合伙人的企业佣金
  */
 class EnterpriseCommissionViewController extends StatefulWidget {
 
@@ -27,7 +29,7 @@ class _EnterpriseCommissionViewControllerState extends State<EnterpriseCommissio
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-      title: "企业佣金",
+      title: "企业佣金(预算)",
       child: CardRefresher(
         refreshController: refreshController,
         onRefresh: _onRefresh,
@@ -45,7 +47,7 @@ class _EnterpriseCommissionViewControllerState extends State<EnterpriseCommissio
 
   List commissionlist = [];
   _onRefresh() async {
-    commissionlist = await DividendManager.getEnterpriseCommission(rid: widget.rid);
+    commissionlist = await DividendManager.getEnterpriseCommission(Account.junior_partner);
 
     setState(() {
 
@@ -54,7 +56,7 @@ class _EnterpriseCommissionViewControllerState extends State<EnterpriseCommissio
 
   _buildChild(BuildContext context, {int index}) {
 
-    DividendModel dividend = commissionlist[index];
+    BudgetEnterpriseCommission dividend = commissionlist[index];
 
     return Container(
       child: Table(
@@ -80,8 +82,8 @@ class _EnterpriseCommissionViewControllerState extends State<EnterpriseCommissio
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
-                  Text("${dividend.create_time}", style: TextStyle(fontSize: 10, color: Colors.grey), textAlign: TextAlign.right),
-                  Text("${dividend.type}", style: TextStyle(fontSize: 13, color: Colors.grey), textAlign: TextAlign.right),
+                  Text("备注", style: TextStyle(fontSize: 10, color: Colors.grey), textAlign: TextAlign.right),
+                  Text("${dividend.remark}", style: TextStyle(fontSize: 13, color: Colors.grey), textAlign: TextAlign.right),
                 ],
               ),
             )
@@ -93,7 +95,7 @@ class _EnterpriseCommissionViewControllerState extends State<EnterpriseCommissio
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text("工价：${dividend.wages}元", style: TextStyle(fontSize: 13, color: Colors.grey), textAlign: TextAlign.left),
+                  Text("工价：${dividend.staffBill}元", style: TextStyle(fontSize: 13, color: Colors.grey), textAlign: TextAlign.left),
                 ],
               ),
             ),
@@ -104,7 +106,7 @@ class _EnterpriseCommissionViewControllerState extends State<EnterpriseCommissio
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   Text("佣金：", style: TextStyle(fontSize: 13, color: Colors.grey), textAlign: TextAlign.right),
-                  Text("${dividend.amount}元", style: TextStyle(fontSize: 13, color: Colors.red), textAlign: TextAlign.right),
+                  Text("${dividend.primaryBill}元", style: TextStyle(fontSize: 13, color: Colors.red), textAlign: TextAlign.right),
                 ],
               ),
             )

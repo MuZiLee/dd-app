@@ -32,7 +32,7 @@ class ZKCommonUtils {
       gravity: ToastGravity.CENTER,
       backgroundColor: Colors.black54,
       textColor: Colors.white,
-      timeInSecForIos: 2,
+      // timeInSecForIos: 2,
     );
   }
 

@@ -1,18 +1,18 @@
 
 import 'package:common_utils/common_utils.dart';
-import 'package:one/Controller/TabBar/Chat/ConversationViewController.dart';
-import 'package:one/Model/EventsStaff.dart';
-import 'package:one/Model/User.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/FactoryManager.dart';
-import 'package:one/Provider/IM.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/Bases/BaseScaffold.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/CardSeries/CardRefresherListView.dart';
-import 'package:one/Views/CardSeries/CardShowActionSheetController.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesBottomSheet.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Controller/TabBar/Chat/ConversationViewController.dart';
+import 'package:demo2020/Model/EventsStaff.dart';
+import 'package:demo2020/Model/User.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/FactoryManager.dart';
+import 'package:demo2020/Provider/IM.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherListView.dart';
+import 'package:demo2020/Views/CardSeries/CardShowActionSheetController.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesBottomSheet.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
@@ -252,12 +252,17 @@ class _AttendanceViewControllerState extends State<AttendanceViewController> {
                     itemBuilder: (_, index) {
                       Log log = logs[index];
 
+                      var username = "";
+                      if (log.ruser != null) {
+                        username = log.ruser.username;
+                      }
+
                       return Column(
                         children: <Widget>[
                           InkWell(
                               child: ListTile(
                                 leading: Icon(log.status == 1 ? Icons.check_circle : Icons.info, color: log.status == 1 ? Colors.blue : Colors.red,),
-                                title: Text(log.ruser.username +":"+ log.role.title, style: TextStyle(fontSize: 14)),
+                                title: Text("审核员:"+ log.role.title, style: TextStyle(fontSize: 14)),
                                 subtitle: Text(log.remark, maxLines: 2, style: TextStyle(fontSize: 13)),
                                 trailing: Text(log.create_time, style: TextStyle(fontSize: 12)),
                               )
@@ -265,6 +270,7 @@ class _AttendanceViewControllerState extends State<AttendanceViewController> {
                           Divider(height: 1),
                         ],
                       );
+
 
                     },
                   );

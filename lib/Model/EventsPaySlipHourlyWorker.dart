@@ -1,5 +1,5 @@
-import 'package:one/Model/FactoryStaff.dart';
-import 'package:one/Model/User.dart';
+import 'package:demo2020/Model/FactoryStaff.dart';
+import 'package:demo2020/Model/User.dart';
 
 class EventsPaySlipHourlyWorker {
 

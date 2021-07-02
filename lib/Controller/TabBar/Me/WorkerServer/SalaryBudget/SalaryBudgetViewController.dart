@@ -1,12 +1,12 @@
 
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:one/Controller/TabBar/Me/WorkerServer/AdvancePayments/AdvancePaymentsViewController.dart';
-import 'package:one/Model/EventsStaff.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/StaffManager.dart';
-import 'package:one/Views/Bases/BaseScaffold.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Controller/TabBar/Me/WorkerServer/AdvancePayments/AdvancePaymentsViewController.dart';
+import 'package:demo2020/Model/EventsStaff.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/StaffManager.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
@@ -52,8 +52,10 @@ class _SalaryBudgetViewControllerState extends State<SalaryBudgetViewController>
   _buildChild(BuildContext context, {int index}) {
 
     EventsStaff staff = events[index];
-    
-    return Container(
+
+    Container tainerA = new Container(
+      height: 112,
+      color: staff.status == 1 ? Colors.grey[200] : Colors.white,
       child: Column(
         children: [
           Table(
@@ -131,10 +133,19 @@ class _SalaryBudgetViewControllerState extends State<SalaryBudgetViewController>
               ]),
             ],
           ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.only(right: 12),
+            height: 22,
+            child: Text(staff.status == 1 ? "已审核" : "待驻场审核", textAlign: TextAlign.right, style: TextStyle(fontSize: 13, color: Colors.grey),),
+          ),
           Divider(height: 1.0)
         ],
       ),
     );
+
+
+    return tainerA;
   }
 
   _epfew(EventsStaff staff) {
@@ -145,7 +156,7 @@ class _SalaryBudgetViewControllerState extends State<SalaryBudgetViewController>
     //法定标准天数 20.83
     double standard_days_of_the_month = 20.83;
     // (员工单价 / 当月标准天数) / 8 * 工时
-    double wage = staff.signingInfo.employee_unit_price / standard_days_of_the_month / 8 * staff.hour - staff.signingInfo.income_tax - staff.signingInfo.insurance_premium;
+    double wage = staff.signingInfo.employee_unit_price * staff.hour;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,

@@ -1,8 +1,8 @@
 
-import 'package:one/Model/FavoritesModel.dart';
-import 'package:one/Provider/SBRequest/SBRequest.dart';
-import 'package:one/config.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Model/FavoritesModel.dart';
+import 'package:demo2020/Provider/SBRequest/SBRequest.dart';
+import 'package:demo2020/config.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ovprogresshud/progresshud.dart';
 

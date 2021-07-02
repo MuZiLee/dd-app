@@ -1,9 +1,9 @@
 
 
 import 'package:awesome_button/awesome_button.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Views/ViewWidget.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Views/ViewWidget.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

@@ -1,7 +1,7 @@
 
-import 'package:one/Controller/WebBrowser/WebBrowserViewController.dart';
-import 'package:one/Model/AdModel.dart';
-import 'package:one/Views/SBImage.dart';
+import 'package:demo2020/Controller/WebBrowser/WebBrowserViewController.dart';
+import 'package:demo2020/Model/AdModel.dart';
+import 'package:demo2020/Views/SBImage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';

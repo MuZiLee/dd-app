@@ -8,16 +8,16 @@
 //  版权所有 © 2019。 保留所有权利
 //
 
-import 'package:one/Controller/WebBrowser/WebBrowserViewController.dart';
-import 'package:one/Model/FavoritesModel.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/FavoritesManager.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/CardSeries/CardRefresherListView.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesFavorite.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
-import 'package:one/config.dart';
+import 'package:demo2020/Controller/WebBrowser/WebBrowserViewController.dart';
+import 'package:demo2020/Model/FavoritesModel.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/FavoritesManager.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherListView.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesFavorite.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/config.dart';
 
 /// 我的收藏
 
@@ -80,8 +80,6 @@ class _FavoritesViewControllerState extends State<FavoritesViewController> {
             title: favorites.title,
             subtitle: favorites.subtitle,
             type: favorites.type,
-//            id: favorites.id.toString(),
-            timestamp: favorites.create_time,
           ),
         );
       },

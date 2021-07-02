@@ -3,7 +3,7 @@
 
 import 'dart:async';
 
-import 'package:one/Views/card_settings/helpers/platform_functions.dart';
+import 'package:demo2020/Views/card_settings/helpers/platform_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

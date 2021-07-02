@@ -9,15 +9,15 @@
 //
 
 
-import 'package:one/Model/Resume.dart';
-import 'package:one/Provider/ResumeManager.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesDate.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesHeader.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesText.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesTextView.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
-import 'package:one/Views/card_settings/card_settings.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Model/Resume.dart';
+import 'package:demo2020/Provider/ResumeManager.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesDate.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesHeader.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesText.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesTextView.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Views/card_settings/widgets/card_settings_panel.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -86,66 +86,71 @@ class _AddWorkExperienceViewControllerState extends State<AddWorkExperienceViewC
           ),
         )
       ],
-      child: CardSettings(
-        // padding: 0,
-        children: <Widget>[
-          CardViewSeriesHeader(
-            title: "*添加工作经历",
-          ),
-          CardViewSeriesText(
-            title: "公司名称",
-            isNotNull: true,
-            placeholder: "公司名字",
-            onChanged: (value) => work.company_name = value,
-          ),
-          CardViewSeriesText(
-            title: "公司地址",
-            isNotNull: true,
-            placeholder: "公司地址",
-            onChanged: (value) => work.company_address = value,
-          ),
-          CardViewSeriesText(
-            title: "公司电话",
-            placeholder: "公司电话",
-            onChanged: (value) => work.company_phone = value,
-          ),
-          CardViewSeriesText(
-            title: "所属职位",
-            isNotNull: true,
-            placeholder: "所在职位",
-            onChanged: (value) => work.company_job = value,
-          ),
-          CardViewSeriesText(
-            title: "在职时长",
-            isNotNull: true,
-            placeholder: "请输入",
-            onChanged: (value) {
-              work.work_time = value;
-            },
-          ),
-          CardViewSeriesDate(
-            title: "离职时间",
-            isNotNull: true,
-            maxTime: new DateTime.now(),
-            minTime: DateTime(1949,9,9),
-            placeholder: work.dimission_time,
-            onConfirm: (DateTime dateTime) {
-              work.dimission_time = "${dateTime.year}-${dateTime.month}-${dateTime.day}";
-            },
-            valueChanged: (DateTime dateTime) {
-              work.dimission_time = "${dateTime.year}-${dateTime.month}-${dateTime.day}";
-            },
-          ),
-          CardViewSeriesTextView(
-            title: "工作内容",
-            isNotNull: true,
-            placeholder: "工作内容",
-            valueChanged: (value) => work.work_content = value,
-          ),
-
-        ],
+      child: SingleChildScrollView(
+        child: buildCardSettings(),
       ),
 
+    );
+  }
+
+  buildCardSettings() {
+    return Column(
+      children: <Widget>[
+        CardViewSeriesHeader(
+          title: "*添加工作经历",
+        ),
+        CardViewSeriesText(
+          title: "公司名称",
+          isNotNull: true,
+          placeholder: "公司名字",
+          onChanged: (value) => work.company_name = value,
+        ),
+        CardViewSeriesText(
+          title: "公司地址",
+          isNotNull: true,
+          placeholder: "公司地址",
+          onChanged: (value) => work.company_address = value,
+        ),
+        CardViewSeriesText(
+          title: "公司电话",
+          placeholder: "公司电话",
+          onChanged: (value) => work.company_phone = value,
+        ),
+        CardViewSeriesText(
+          title: "所属职位",
+          isNotNull: true,
+          placeholder: "所在职位",
+          onChanged: (value) => work.company_job = value,
+        ),
+        CardViewSeriesText(
+          title: "在职时长",
+          isNotNull: true,
+          placeholder: "请输入",
+          onChanged: (value) {
+            work.work_time = value;
+          },
+        ),
+        CardViewSeriesDate(
+          title: "离职时间",
+          isNotNull: true,
+          maxTime: new DateTime.now(),
+          minTime: DateTime(1949,9,9),
+          placeholder: work.dimission_time,
+          onConfirm: (DateTime dateTime) {
+            work.dimission_time = "${dateTime.year}-${dateTime.month}-${dateTime.day}";
+          },
+          valueChanged: (DateTime dateTime) {
+            work.dimission_time = "${dateTime.year}-${dateTime.month}-${dateTime.day}";
+          },
+        ),
+        CardViewSeriesTextView(
+          title: "工作内容",
+          isNotNull: true,
+          placeholder: "工作内容",
+          valueChanged: (value) => work.work_content = value,
+        ),
+
+      ],
     );
   }
 

@@ -9,22 +9,25 @@
 //
 
 
-import 'package:one/Controller/TabBar/Me/MyResume/BasicInformation/AddResumeViewController.dart';
-import 'package:one/Model/Resume.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/ResumeManager.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Model/Resume.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/ResumeManager.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
+
+import 'AddResumeViewController.dart';
 
 /// 我的简历
 class BasicInformationViewController extends StatefulWidget {
   static const routeName = "/me/MyResume";
 
-  BasicInformationViewController();
+  bool isShowAdd = true;
+  String phone = Account.user.phone;
+  BasicInformationViewController(this.isShowAdd, {this.phone});
 
   @override
   _BasicInformationViewControllerState createState() =>
@@ -37,7 +40,7 @@ class _BasicInformationViewControllerState
   static Resume resume;
 
   _onRefresh(BuildContext context) async {
-    resume = await ResumeManager.get();
+    resume = await ResumeManager.get(widget.phone);
     setState(() {});
   }
 
@@ -46,18 +49,18 @@ class _BasicInformationViewControllerState
     return BaseScaffold(
       title: "基本信息",
       actions: <Widget>[
-        Container(
+       widget.isShowAdd == true ? Container(
           padding: EdgeInsets.all(10),
           child: RaisedButton(
             color: Colors.deepOrangeAccent,
-            child: Text("修改", style: TextStyle(color: Colors.white)),
+            child: Text("编写", style: TextStyle(color: Colors.white)),
             onPressed: () {
               routePush(AddResumeViewController()).then((value){
                 _onRefresh(context);
               });
             },
           ),
-        )
+        ) : Container()
       ],
       child:  SafeArea(
         bottom: true,

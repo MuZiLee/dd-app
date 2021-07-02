@@ -1,9 +1,8 @@
 
 import 'dart:io';
 
-import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:one/Model/VersionModel.dart';
-import 'package:one/Provider/SBRequest/SBRequest.dart';
+import 'package:demo2020/Model/VersionModel.dart';
+import 'package:demo2020/Provider/SBRequest/SBRequest.dart';
 
 class SBVersionsManager {
   

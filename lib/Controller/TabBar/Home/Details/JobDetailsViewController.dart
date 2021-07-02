@@ -8,22 +8,19 @@
 //  版权所有 © 2019。 保留所有权利
 //
 
-import 'package:one/Controller/TabBar/Chat/ConversationViewController.dart';
-import 'package:one/Controller/TabBar/Me/BoundInvitationCode/BoundInvitationCodeViewController.dart';
-import 'package:one/Model/JobModel.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/FactoryManager.dart';
-import 'package:one/Provider/FavoritesManager.dart';
-import 'package:one/Provider/IM.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
-import 'package:one/config.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Controller/TabBar/Chat/ConversationViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/BoundInvitationCode/BoundInvitationCodeViewController.dart';
+import 'package:demo2020/Model/JobModel.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/FactoryManager.dart';
+import 'package:demo2020/Provider/FavoritesManager.dart';
+import 'package:demo2020/Provider/IM.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/config.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
-import 'package:sharesdk_plugin/sharesdk_defines.dart';
-import 'package:sharesdk_plugin/sharesdk_interface.dart';
-import 'package:sharesdk_plugin/sharesdk_map.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class JobDetailsViewController extends StatefulWidget {
@@ -248,7 +245,7 @@ class _JobDetailsViewControllerState extends State<JobDetailsViewController> {
   /// 分享
   void shareWechatAlert(int type) {
 
-    SSDKMap params = SSDKMap();
+    // SSDKMap params = SSDKMap();
 
     var url = "http://47.105.72.106/share/?id=${widget.job.id}";
 
@@ -262,50 +259,50 @@ class _JobDetailsViewControllerState extends State<JobDetailsViewController> {
     List images = [widget.job.factory.logo];
     var imageUrl = widget.job.factory.logo;
 
-    params.setWechat(
-        text: text,
-        title: title,
-        url: url,
-        thumbImage: null,
-        images: images,
-        musicFileURL: null,
-        extInfo: null,
-        imageUrl: imageUrl,
-        imageData: "/storage/emulated/0/Mob/cn.sharesdk.demo/cache/images/aa.jpg",
-        fileData: null,
-        emoticonData: null,
-        fileExtension: null,
-        sourceFileData: null,
-        contentType: SSDKContentTypes.webpage,
-        subPlatform: ShareSDKPlatforms.weChatFavorites);
-
-    params.setGeneral(
-        title: title,
-        text: text,
-        images: images,
-        imageUrlAndroid: null,
-        imagePathAndroid: null,
-        url: url,
-        titleUrlAndroid: null,
-        musicUrlAndroid: null,
-        videoUrlAndroid: null,
-        filePath: null,
-        contentType: SSDKContentTypes.webpage);
-
-
-    if (type == 0) {
-      SharesdkPlugin.share(ShareSDKPlatforms.wechatSession, params, (SSDKResponseState, Map userData, Map contentEntity, SSDKError){
-
-      });
-    }
-
-    if (type == 1) {
-      SharesdkPlugin.share(ShareSDKPlatforms.wechatTimeline, params, (SSDKResponseState, Map userData, Map contentEntity, SSDKError onError){
-
-
-      });
-
-    }
+    // params.setWechat(
+    //     text: text,
+    //     title: title,
+    //     url: url,
+    //     thumbImage: null,
+    //     images: images,
+    //     musicFileURL: null,
+    //     extInfo: null,
+    //     imageUrl: imageUrl,
+    //     imageData: "/storage/emulated/0/Mob/cn.sharesdk.demo/cache/images/aa.jpg",
+    //     fileData: null,
+    //     emoticonData: null,
+    //     fileExtension: null,
+    //     sourceFileData: null,
+    //     contentType: SSDKContentTypes.webpage,
+    //     subPlatform: ShareSDKPlatforms.weChatFavorites);
+    //
+    // params.setGeneral(
+    //     title: title,
+    //     text: text,
+    //     images: images,
+    //     imageUrlAndroid: null,
+    //     imagePathAndroid: null,
+    //     url: url,
+    //     titleUrlAndroid: null,
+    //     musicUrlAndroid: null,
+    //     videoUrlAndroid: null,
+    //     filePath: null,
+    //     contentType: SSDKContentTypes.webpage);
+    //
+    //
+    // if (type == 0) {
+    //   SharesdkPlugin.share(ShareSDKPlatforms.wechatSession, params, (SSDKResponseState, Map userData, Map contentEntity, SSDKError){
+    //
+    //   });
+    // }
+    //
+    // if (type == 1) {
+    //   SharesdkPlugin.share(ShareSDKPlatforms.wechatTimeline, params, (SSDKResponseState, Map userData, Map contentEntity, SSDKError onError){
+    //
+    //
+    //   });
+    //
+    // }
 
 
   }

@@ -1,9 +1,9 @@
-import 'package:one/Model/ShopProductsModel.dart';
-import 'package:one/Provider/ShopManager.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/SBImage.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Model/ShopProductsModel.dart';
+import 'package:demo2020/Provider/ShopManager.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/SBImage.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 

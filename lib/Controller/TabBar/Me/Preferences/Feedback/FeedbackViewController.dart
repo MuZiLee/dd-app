@@ -8,12 +8,12 @@
 //  版权所有 © 2019。 保留所有权利
 //
 
-import 'package:one/Provider/SBRequest/SBRequest.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesHeader.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesText.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesTextView.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Provider/SBRequest/SBRequest.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesHeader.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesText.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesTextView.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/material.dart';
 
 class FeedbackViewController extends StatefulWidget {
@@ -78,7 +78,7 @@ class _FeedbackViewControllerState extends State<FeedbackViewController> {
 
 
 
-  buildThemeButton(BuildContext context) {
+  buildThemeButton(BuildContext context) async{
     if (title.length < 2) {
       ZKCommonUtils.showToast("请写标题");
       return;
@@ -97,14 +97,12 @@ class _FeedbackViewControllerState extends State<FeedbackViewController> {
 
     print(arguments);
 
-    SBRequest.post(url, arguments: arguments).then((SBResponse response) {
-
-      if (response.code == 200) {
-        ZKCommonUtils.showToast("感谢您的意见，我们会尽快为您解决~！");
-        Future.delayed(Duration(seconds: 2), () {
-          Navigator.of(context).pop();
-        });
-      }
-    });
+    SBResponse response = await SBRequest.post(url, arguments: arguments);
+    if (response?.code == 200) {
+      ZKCommonUtils.showToast("感谢您的意见，我们会尽快为您解决~！");
+      Future.delayed(Duration(seconds: 2), () {
+        Navigator.of(context).pop();
+      });
+    }
   }
 }

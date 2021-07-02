@@ -1,29 +1,25 @@
 
 import 'dart:convert';
 
-import 'package:one/Model/DividendModel.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/SBRequest/SBRequest.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Model/BudgetEnterpriseCommission.dart';
+import 'package:demo2020/Model/DividendModel.dart';
+import 'package:demo2020/Model/MoneyModel.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/SBRequest/SBRequest.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 
 class DividendManager extends ChangeNotifier {
 
 
-  static getEnterpriseCommission({int rid}) async {
-    var url = "dividend/getEnterpriseCommission";
-    var arguments = {
-      "rid" : rid,
-      "uid" : Account.user.id
-    };
-    SBResponse response = await SBRequest.post(url, arguments: arguments);
-    print(jsonEncode(response.data));
-    List commissionlist = [];
+  static getEnterpriseCommission(int rid) async {
 
+    var url = "dividend/getBudgetEnterpriseCommission";
+    SBResponse response = await SBRequest.post(url, arguments: {"uid":Account.user.id, "rid": rid});
+    var data = response.data;
+    List<BudgetEnterpriseCommission> commissionlist = [];
     response.data.map((json){
-
-      commissionlist.add(DividendModel.fromJson(json));
-
+      commissionlist.add(BudgetEnterpriseCommission.fromJson(json));
     }).toList();
 
     return commissionlist;
@@ -48,6 +44,29 @@ class DividendManager extends ChangeNotifier {
     }).toList();
     return commissionlist;
   }
+
+  /**
+   * 可提现成的提成或分红
+   */
+  static getMoney({int rid}) async {
+    var url = "paySlip/getMoney";
+    var arguments = {
+      "type" : rid,
+      "uid": Account.user.id
+    };
+    SBResponse response = await SBRequest.post(url, arguments: arguments);
+    print(jsonEncode(response.data));
+    List commissionlist = [];
+
+    response.data.map((json) {
+
+      commissionlist.add(MoneyModel.fromJson(json));
+
+    }).toList();
+    return commissionlist;
+  }
+
+
 
   /**
    * 提现到零钱

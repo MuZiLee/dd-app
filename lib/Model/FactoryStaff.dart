@@ -1,10 +1,10 @@
 
-import 'package:one/Model/EventsStaff.dart';
-import 'package:one/Model/JobModel.dart';
-import 'package:one/Model/PartenerPvivot.dart';
-import 'package:one/Model/StrategicAlliance.dart';
-import 'package:one/config.dart';
-import 'package:one/Model/SigingInformation.dart';
+import 'package:demo2020/Model/EventsStaff.dart';
+import 'package:demo2020/Model/JobModel.dart';
+import 'package:demo2020/Model/PartenerPvivot.dart';
+import 'package:demo2020/Model/StrategicAlliance.dart';
+import 'package:demo2020/config.dart';
+import 'package:demo2020/Model/SigingInformation.dart';
 
 class FactoryStaff {
   String create_time;

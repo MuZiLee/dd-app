@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:one/Views/card_settings/widgets/card_settings_panel.dart';
+import 'package:demo2020/Views/card_settings/widgets/card_settings_panel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

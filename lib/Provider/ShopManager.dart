@@ -1,10 +1,10 @@
-import 'package:one/Model/ShopCartModel.dart';
-import 'package:one/Model/ShopCategory.dart';
-import 'package:one/Model/ShopNavitems.dart';
-import 'package:one/Model/ShopOrder.dart';
-import 'package:one/Model/ShopProductsModel.dart';
-import 'package:one/Provider/SBRequest/SBRequest.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Model/ShopCartModel.dart';
+import 'package:demo2020/Model/ShopCategory.dart';
+import 'package:demo2020/Model/ShopNavitems.dart';
+import 'package:demo2020/Model/ShopOrder.dart';
+import 'package:demo2020/Model/ShopProductsModel.dart';
+import 'package:demo2020/Provider/SBRequest/SBRequest.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

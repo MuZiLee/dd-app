@@ -8,13 +8,13 @@
 //  版权所有 © 2019。 保留所有权利
 //
 
-import 'package:one/Controller/TabBar/Home/Shop/Addres/AddAddressViewController.dart';
-import 'package:one/Model/AddresModel.dart';
-import 'package:one/Provider/AddresManager.dart';
-import 'package:one/Provider/ShopManager.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Controller/TabBar/Home/Shop/Addres/AddAddressViewController.dart';
+import 'package:demo2020/Model/AddresModel.dart';
+import 'package:demo2020/Provider/AddresManager.dart';
+import 'package:demo2020/Provider/ShopManager.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';

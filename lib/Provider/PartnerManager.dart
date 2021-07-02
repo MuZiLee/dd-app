@@ -1,7 +1,7 @@
-import 'package:one/Model/EventPartnerAudit.dart';
-import 'package:one/Model/User.dart';
-import 'package:one/Provider/SBRequest/SBRequest.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Model/EventPartnerAudit.dart';
+import 'package:demo2020/Model/User.dart';
+import 'package:demo2020/Provider/SBRequest/SBRequest.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 
 /**
  * 合伙人管理器

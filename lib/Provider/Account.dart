@@ -1,12 +1,13 @@
 import 'dart:convert';
 
-import 'package:one/Controller/Login/LoginViewController.dart';
-import 'package:one/Controller/TabBar/SBTabbarViewController.dart';
-import 'package:one/Model/User.dart';
-import 'package:one/Provider/IM.dart';
-import 'package:one/Provider/SBRequest/SBRequest.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
-import 'package:one/utils/zeus_kit/utils/zk_random_util.dart';
+import 'package:demo2020/Controller/Login/LoginViewController.dart';
+import 'package:demo2020/Controller/TabBar/SBTabbarViewController.dart';
+import 'package:demo2020/Model/FriendsModel.dart';
+import 'package:demo2020/Model/User.dart';
+import 'package:demo2020/Provider/IM.dart';
+import 'package:demo2020/Provider/SBRequest/SBRequest.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_random_util.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -64,8 +65,7 @@ class Account extends ChangeNotifier {
     var password = shared.getString("password");
 
     if (token != null && token.length > 0) {
-      await login(phone: phone, password: password);
-      return true;
+      return await login(phone: phone, password: password);
     } else {
       return false;
     }
@@ -75,13 +75,15 @@ class Account extends ChangeNotifier {
    * 退出登录
    */
   static logout() async {
+    await IM.logout();
+
     SharedPreferences shared = await SharedPreferences.getInstance();
     shared.remove("token");
     shared.remove("phone");
     shared.remove("password");
     user = null;
     pushAndRemoveUntil(LoginViewController());
-    IM.logout();
+
   }
 
   /**
@@ -94,12 +96,22 @@ class Account extends ChangeNotifier {
     SBResponse response = await SBRequest.post(url, arguments: arguments);
     Progresshud.dismiss();
     if (response.code == 0) {
+
       // 保存token
       SharedPreferences shared = await SharedPreferences.getInstance();
       shared.setString("token", response.data);
       shared.setString("phone", phone);
       shared.setString("password", password);
-      return await getUserInfo();
+      if (await getUserInfo() == false) {
+        return false;
+      }
+      // 登录IM
+      await IM.loginIM(phone: phone);
+      if (user == null) {
+        return false;
+      } else {
+        return true;
+      }
     } else {
       ZKCommonUtils.showLongToast(response.msg);
       return false;
@@ -146,6 +158,64 @@ class Account extends ChangeNotifier {
   }
 
   /**
+   * 申请好友
+   */
+  static addFriend({tuid, fuid}) async{
+    var url = "account/addFriend";
+    autoCode = ZKRandom.random(lenght: 4);
+    var arguments = {
+      "tuid": tuid,
+      "fuid": fuid
+    };
+    SBResponse response = await SBRequest.post(url, arguments: arguments);
+    if (response == null) {
+      return false;
+    }
+    if (response.code == 0) {
+      ZKCommonUtils.showToast(response.msg);
+      return true;
+    } else {
+      ZKCommonUtils.showToast(response.msg);
+      return false;
+    }
+  }
+
+  /**
+   * 获取好友申请列表
+   */
+  static getFriends() async{
+    var url = "account/getFriends";
+    SBResponse response = await SBRequest.post(url, arguments: {"uid":Account.user.id});
+
+    List users = [];
+
+    response.data.map((item){
+      print(jsonEncode(item));
+      users.add(FriendsModel.fromJson(item));
+    }).toList();
+
+    return users;
+  }
+
+  /**
+   * 同意好友申请
+   */
+  static acceptInvitation({FriendsModel model}) async {
+    var url = "account/acceptInvitation";
+    SBResponse response = await SBRequest.post(url, arguments: {"id":model.id});
+    return response.data;
+  }
+
+  /**
+   * 拒绝好友申请
+   */
+  static declineInvitation({FriendsModel model}) async {
+    var url = "account/declineInvitation";
+    SBResponse response = await SBRequest.post(url, arguments: {"id":model.id});
+    return response.data;
+  }
+
+  /**
    * 获取注册验证码
    */
   static getRegisterCode({String phone}) async {
@@ -165,12 +235,13 @@ class Account extends ChangeNotifier {
     };
 
     Response response = await SBRequest.post2(url, arguments: arguments);
+
     var json = jsonDecode(response.data);
 
     print(response.runtimeType);
     print(response);
     if (json['code'] == 200) {
-      ZKCommonUtils.showToast("验证码已送，请注意查收");
+      ZKCommonUtils.showToast("验证码已送，请注意查收："+autoCode);
       return true;
     } else if (json['code'] == "16") {
       autoCode = "";
@@ -190,12 +261,15 @@ class Account extends ChangeNotifier {
     var url = "account/createAccount";
     SBResponse response = await SBRequest.post(url,
         arguments: {"phone": phone, "password": password});
-    ZKCommonUtils.showToast(response.msg);
-    autoCode = "";
-    if (response.code == 0) {
-      pop();
-      print(response.data);
+    if (response?.data != null) {
+      ZKCommonUtils.showToast(response.msg);
+      autoCode = "";
+      if (response.code == 0) {
+        pop();
+        print(response.data);
+      }
     }
+
   }
 
   /**
@@ -285,9 +359,7 @@ class Account extends ChangeNotifier {
     SBResponse response = await SBRequest.post(url, arguments: arguments);
     ZKCommonUtils.showLongToast(response.msg);
     if (response.code == 0) {
-      pop();
       await getUserInfo();
-
       return true;
     } else {
       ZKCommonUtils.showToast(response.msg);
@@ -298,26 +370,17 @@ class Account extends ChangeNotifier {
   /**
    * 设置头像
    */
-  static setAvatar(dynamic file) async {
+  static setAvatar(String avatar) async {
 
-    SBResponse response = await SBRequest.uploadFile(path: file.path);
-
-    if (response.code == 0) {
-      print(response.data);
-      var url = "account/setAvatar";
-      SBResponse res = await SBRequest.post(url, arguments: {"url": response.data['url']});
-      Progresshud.dismiss();
-      if (res.code == 0) {
-        await getUserInfo();
-        ZKCommonUtils.showToast("更新完成");
-        return true;
-      } else {
-        ZKCommonUtils.showToast("保存失败");
-        return false;
-      }
+    var url = "account/setAvatar";
+    SBResponse res = await SBRequest.post(url, arguments: {"url": avatar});
+    Progresshud.dismiss();
+    if (res.code == 0) {
+      await getUserInfo();
+      ZKCommonUtils.showToast("更新完成");
+      return true;
     } else {
-      Progresshud.dismiss();
-      ZKCommonUtils.showToast("上传失败");
+      ZKCommonUtils.showToast("保存失败");
       return false;
     }
   }

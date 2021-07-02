@@ -8,11 +8,11 @@
 //  版权所有 © 2019。 保留所有权利
 //
 
-import 'package:one/CellItem.dart';
-import 'package:one/Model/Resume.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/ResumeManager.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/CellItem.dart';
+import 'package:demo2020/Model/Resume.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/ResumeManager.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +20,10 @@ import 'package:flutter/material.dart';
 class MyResumeViewControlle extends StatefulWidget {
   static const routeName = "/me/MyResume";
 
-  MyResumeViewControlle();
+  bool isShowAdd = true;
+  String username;
+  String phone = Account.user.phone;
+  MyResumeViewControlle(this.isShowAdd, {this.username = "我的", this.phone});
 
   @override
   _MyResumeViewControlleState createState() => _MyResumeViewControlleState();
@@ -32,7 +35,7 @@ class _MyResumeViewControlleState extends State<MyResumeViewControlle> {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-      title: "我的简历",
+      title: widget.username + "简历",
       child: ListView(
         children: <Widget>[
           Container(
@@ -40,7 +43,7 @@ class _MyResumeViewControlleState extends State<MyResumeViewControlle> {
             color: Colors.white,
             child: Column(
               children: <Widget>[
-                CellItem(imagePath: 'images/icon_look.png', title: '基本信息'),
+                CellItem(imagePath: 'images/icon_look.png', title: '基本信息', isShowAdd: widget.isShowAdd, phone: widget.phone,),
               ],
             ),
           ),
@@ -49,7 +52,7 @@ class _MyResumeViewControlleState extends State<MyResumeViewControlle> {
             color: Colors.white,
             child: Column(
               children: <Widget>[
-                CellItem(imagePath: 'images/icon_look.png', title: '教育经历'),
+                CellItem(imagePath: 'images/icon_look.png', title: '教育经历', isShowAdd: widget.isShowAdd, phone: widget.phone),
               ],
             ),
           ),
@@ -58,7 +61,7 @@ class _MyResumeViewControlleState extends State<MyResumeViewControlle> {
             color: Colors.white,
             child: Column(
               children: <Widget>[
-                CellItem(imagePath: 'images/icon_look.png', title: '工作经验'),
+                CellItem(imagePath: 'images/icon_look.png', title: '工作经验', isShowAdd: widget.isShowAdd, phone: widget.phone),
               ],
             ),
           )

@@ -9,9 +9,9 @@
 //
 
 
-import 'package:one/Provider/SBVersionsManager.dart';
-import 'package:one/Views/LogoWidget.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Provider/SBVersionsManager.dart';
+import 'package:demo2020/Views/LogoWidget.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -62,8 +62,8 @@ class _AboutUsViewControllerState extends State<AboutUsViewController> {
               Expanded(child: Column(
                 children: <Widget>[
 
-                  Text("version ：${SBVersionsManager.version.version}", textAlign: TextAlign.center, style: TextStyle(fontSize: 12,color: subordinateColor)),
-                  Text("buildNumber ：${SBVersionsManager.version.build}", textAlign: TextAlign.center, style: TextStyle(fontSize: 12,color: subordinateColor)),
+                  Text("version ：${SBVersionsManager.version?.version}", textAlign: TextAlign.center, style: TextStyle(fontSize: 12,color: subordinateColor)),
+                  Text("buildNumber ：${SBVersionsManager.version?.build}", textAlign: TextAlign.center, style: TextStyle(fontSize: 12,color: subordinateColor)),
                   Text("com.dandankj.one", textAlign: TextAlign.center, style: TextStyle(fontSize: 12,color: subordinateColor)),
                   SizedBox(
                     height: 64.0,

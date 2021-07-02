@@ -1,5 +1,7 @@
 
 import 'dart:io';
+import 'package:demo2020/Provider/StaffManager.dart';
+import 'package:demo2020/utils/zeus_kit/zeus_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_luban/flutter_luban.dart';
@@ -7,13 +9,15 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ovprogresshud/progresshud.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../../config.dart';
+
 class CardViewSeriesAvatar extends StatefulWidget {
 
   final String title;
   final String avatar;
   final bool isNotNull;
   final Function(String, String) onChanged; /// 返回选择的头 base64 字符串
-  final ValueChanged<File> valueChanged;
+  final ValueChanged<String> valueChanged;
   CardViewSeriesAvatar({
     this.title = "",
     this.avatar = "images/Avatar/avatar.png",
@@ -33,12 +37,14 @@ class _CardViewSeriesAvatarState extends State<CardViewSeriesAvatar> {
   @override
   Widget build(BuildContext context) {
 
-    if (widget.avatar.contains("http")) {
-      image = Image.network(widget.avatar, width: 58, height: 58, fit: BoxFit.cover);
-    } else if (widget.avatar.contains(card_series_default_avatar)) {
-      image = Image.asset(widget.avatar, width: 58, height: 58, fit: BoxFit.cover);
-    } else {
-      image = Image.file(File(widget.avatar), width: 58, height: 58, fit: BoxFit.cover);
+    if (image == null) {
+      if (widget.avatar.contains("http")) {
+        image = Image.network(widget.avatar, width: 58, height: 58, fit: BoxFit.cover);
+      } else if (widget.avatar.contains(card_series_default_avatar)) {
+        image = Image.asset(widget.avatar, width: 58, height: 58, fit: BoxFit.cover);
+      } else {
+        image = Image.file(File(widget.avatar), width: 58, height: 58, fit: BoxFit.cover);
+      }
     }
 
     return InkWell(
@@ -83,6 +89,8 @@ class _CardViewSeriesAvatarState extends State<CardViewSeriesAvatar> {
               title: Text('上传头像', style: TextStyle(fontSize: 14)), //标题
               message: Text('请选择获取照片方式'), //提示内容
               actions: <Widget>[
+
+
                 //操作按钮集合
                 CupertinoActionSheetAction(
                   child: Text('从相册获取',style: TextStyle(fontSize: 14)),
@@ -90,12 +98,13 @@ class _CardViewSeriesAvatarState extends State<CardViewSeriesAvatar> {
                     retrieveLostData();
                   },
                 ),
-//                  CupertinoActionSheetAction(
-//                    child: Text('拍照',style: TextStyle(fontSize: 14)),
-//                    onPressed: () {
-//                      cameraLostData();
-//                    },
-//                  ),
+                CupertinoActionSheetAction(
+                  child: Text('拍照',style: TextStyle(fontSize: 14)),
+                  onPressed: () {
+                    cameraLostData();
+                  },
+                ),
+
               ],
               cancelButton: CupertinoActionSheetAction(
                 //取消按钮
@@ -115,26 +124,61 @@ class _CardViewSeriesAvatarState extends State<CardViewSeriesAvatar> {
   Future<void> retrieveLostData() async {
     Navigator.of(context).pop();
 
-    File image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    // ignore: deprecated_member_use
+    File imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
     if (image == null) {
       return;
     }
+    print(imageFile.path);
     Progresshud.show();
+    ZKCommonUtils.showToast("开始压缩图片");
+    var tmpimage = await compressImage(imageFile);
+    ZKCommonUtils.showToast("开始上传图片");
+    var url = await StaffManager.uploadImage(tmpimage);
+    Progresshud.dismiss();
+    image = Image.network(Config.BASE_URL+url, width: 58, height: 58, fit: BoxFit.cover);
+    setState(() {
+      widget.valueChanged(url);
+    });
+
+  }
+
+  Future<void> cameraLostData() async {
+    Navigator.of(context).pop();
+
+    // ignore: deprecated_member_use
+    File imageFile = await ImagePicker.pickImage(source: ImageSource.camera);
+    if (image == null) {
+      return;
+    }
+    print(imageFile.path);
+    Progresshud.show();
+    ZKCommonUtils.showToast("开始压缩图片");
+    var tmpimage = await compressImage(imageFile);
+    ZKCommonUtils.showToast("开始上传图片");
+    var url = await StaffManager.uploadImage(tmpimage);
+    Progresshud.dismiss();
+    image = Image.network(Config.BASE_URL+url, width: 58, height: 58, fit: BoxFit.cover);
+    setState(() {
+      widget.valueChanged(url);
+    });
+  }
+
+  /**
+   * 压缩图片
+   */
+  compressImage(File file) async{
     var tempDir = await getTemporaryDirectory();
     String tempPath = tempDir.path;
     CompressObject compressObject = CompressObject(
-      imageFile: image,
-      path: tempPath
+        imageFile: file,
+        path: tempPath,
+        mode: CompressMode.LARGE2SMALL
     );
-    Luban.compressImage(compressObject).then((_path) {
-      if (widget.valueChanged != null) {
-        widget.valueChanged(File(_path));
-      }
-    });
-
-///storage/emulated/0/DCIM/Camera/58843017088_avatar.png
-
+    return await Luban.compressImage(compressObject);
   }
+
+  // /--------------------
 
 
 }

@@ -1,15 +1,15 @@
 
 import 'package:common_utils/common_utils.dart';
-import 'package:one/Controller/TabBar/Chat/ConversationViewController.dart';
-import 'package:one/Controller/TabBar/Chat/FriendsViewController.dart';
-import 'package:one/Controller/TabBar/Chat/SearchUserViewController.dart';
-import 'package:one/Provider/IM.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/Bases/BaseScaffold.dart';
-import 'package:one/Views/CardSeries/CardChatTableViewCell.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/CardSeries/CardRefresherListView.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Controller/TabBar/Chat/ConversationViewController.dart';
+import 'package:demo2020/Controller/TabBar/Chat/FriendsViewController.dart';
+import 'package:demo2020/Controller/TabBar/Chat/SearchUserViewController.dart';
+import 'package:demo2020/Provider/IM.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Views/CardSeries/CardChatTableViewCell.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherListView.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -36,9 +36,11 @@ class _ChatViewControllerState extends State<ChatViewController> {
     }
     refreshController.refreshFailed();
     if (conversations.length > 0) {
-      setState(() {
+      if (this != null) {
+        setState(() {
 
-      });
+        });
+      }
     }
   }
   @override

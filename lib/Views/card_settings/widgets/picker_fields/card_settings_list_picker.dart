@@ -1,8 +1,8 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import 'package:one/Views/card_settings/flutter_material_pickers/helpers/show_scroll_picker.dart';
-import 'package:one/Views/card_settings/helpers/platform_functions.dart';
+import 'package:demo2020/Views/card_settings/flutter_material_pickers/helpers/show_scroll_picker.dart';
+import 'package:demo2020/Views/card_settings/helpers/platform_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

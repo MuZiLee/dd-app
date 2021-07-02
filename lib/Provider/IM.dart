@@ -1,9 +1,10 @@
 
-import 'package:one/Model/User.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/SBRequest/SBRequest.dart';
-import 'package:one/utils/sp_util/sp_util.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Model/User.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/SBRequest/SBRequest.dart';
+import 'package:demo2020/utils/AppIconBadge.dart';
+import 'package:demo2020/utils/sp_util/sp_util.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -16,79 +17,74 @@ class IM extends ChangeNotifier {
   static bool isLogin = false;
   JMSingle single;
 
-  static String appkey = "f78b35c18acfa39733e6492d";
+  static String appkey = "79778172c79dd53e94bb6ae5";
 
   static JMUserInfo jmUserInfo;
   static JPush jpush = new JPush();
 
   static MethodChannel channel = MethodChannel('jmessage_flutter');
-  static JmessageFlutter jmessage =
-      new JmessageFlutter.private(channel, const LocalPlatform());
+  static JmessageFlutter jmessage = new JmessageFlutter.private(channel, const LocalPlatform());
 
   /// 监听-登录状态事件
   static bool isLogout = false;
 
   static init() async {
-////    jpush.setup(appKey: appkey, production: false, channel: "jmessage_flutter");
-//    jpush.setup(appKey: appkey, production: false, channel: "jmessage_flutter");
-//    // 平台消息可能失败，因此我们使用 try/catch PlatformException.
-//    jpush.getRegistrationID().then((rid) async{
-//      print("【jpush】 getRegistrationID: $rid");
-//      await updateRegistrationID();
-//    });
+
     initPlatformState();
 
-    jmessage..setDebugMode(enable: true);
+    jmessage.setDebugMode(enable: true);
     jmessage.init(
         isOpenMessageRoaming: true,
         appkey: appkey,
         isProduction: false,
         channel: "jmessage_flutter");
-    jmessage.applyPushAuthority(
-        new JMNotificationSettingsIOS(sound: true, alert: true, badge: true));
-
-    jmessage.addLoginStateChangedListener((JMLoginStateChangedType type) async {
-      if (type == JMLoginStateChangedType.user_logout) {
-        if (!isLogout) {
-          ZKCommonUtils.showToast("你的账号在别处登录");
-          isLogout = true;
-          await Account.logout();
-        }
-        print("------------ 强迫退出登录 ------------");
-      }
-    });
-
+    jmessage.applyPushAuthority(new JMNotificationSettingsIOS(sound: true, alert: true, badge: true));
     print("【初始化jmessage完成】");
-
-    SharedPreferences shared = await SharedPreferences.getInstance();
-    String phone = shared.get("phone");
-    await loginIM(phone: phone);
-
-    /// 好友请求事件
-    eventAddContactNotifyListener();
   }
 
   static loginIM({String phone}) async {
+    print("login im");
     isLogin = false;
     // 登录IM
     await channel.invokeMethod('login',
         {'username': phone, 'password': "123456789"}).then((value) async {
       print("IM登录成功");
       isLogin = true;
-      Account.user.jmUserInfo = await jmessage.getMyInfo();
-      print("IM用户数据:${Account.user.jmUserInfo.toJson()}");
-    }).catchError((onError) async {
-      print(onError.toString());
-      if (onError?.code?.toString().contains("801003")) {
-        await jmessage.userRegister(
-            username: phone, password: "123456789", nickname: phone);
-      } else if (onError.toString().contains("801003")) {
-        await jmessage.userRegister(
-            username: phone, password: "123456789", nickname: phone);
+      if (jmessage != null) {
+        Account.user.jmUserInfo = await jmessage.getMyInfo();
+        print("IM用户数据:${Account.user.jmUserInfo.toJson()}");
       }
-
-      await loginIM(phone: phone);
+    }).catchError((onError) async {
+      print("IM登录失败");
+      print(onError.toString());
+      // if (onError?.code?.toString().contains("801003")) {
+      //   await jmessage.userRegister(
+      //       username: phone, password: "123456789", nickname: phone);
+      // } else if (onError.toString().contains("801003")) {
+      //   await jmessage.userRegister(
+      //       username: phone, password: "123456789", nickname: phone);
+      // }
+      //
+      // await loginIM(phone: phone);
     });
+
+
+    if (jmessage != null) {
+      jmessage.addLoginStateChangedListener((JMLoginStateChangedType type) async {
+        if (type == JMLoginStateChangedType.user_logout) {
+          if (!isLogout) {
+            ZKCommonUtils.showToast("你的账号在别处登录");
+            isLogout = true;
+            await Account.logout();
+          }
+          print("------------ 强迫退出登录 ------------");
+        }
+      });
+    }
+
+    /// 好友请求事件
+    eventAddContactNotifyListener();
+
   }
 
   /**
@@ -98,10 +94,9 @@ class IM extends ChangeNotifier {
     await channel.invokeMethod('logout').then((value) async {
       print("IM退出登陆");
       isLogin = false;
-      jmessage = null;
     }).catchError((onError) async {
-      print("IM重试退出登陆");
-      await logout();
+      print("IM退出登录失败");
+      print(onError.toString());
     });
   }
 
@@ -126,8 +121,7 @@ class IM extends ChangeNotifier {
     textMessage = null;
   }
 
-  static eventAddReceiveMessageListener(
-      ValueChanged<JMTextMessage> textMessage) {
+  static eventAddReceiveMessageListener(ValueChanged<JMTextMessage> textMessage) {
     print("监听消息");
     // 监听-消息事件
     // message 和 retractedMessage 可能是
@@ -145,14 +139,19 @@ class IM extends ChangeNotifier {
         textMessage(message);
       } else if (message.runtimeType.toString() == "JMEventMessage") {
         print("【JMEventMessage消息】");
+        textMessage(message);
       } else if (message.runtimeType.toString() == "JMCustomMessage") {
         print("【JMCustomMessage消息】");
+        textMessage(message);
       }
     });
   }
 
   /// 监听-好友事件
   static eventAddContactNotifyListener() {
+    if (jmessage == null) {
+      return;
+    }
     jmessage.addContactNotifyListener((JMContactNotifyEvent event) async {
       if (event.type == JMContactNotifyType.invite_received) {
         ZKCommonUtils.showToast(event.reason);
@@ -175,18 +174,25 @@ class IM extends ChangeNotifier {
     return SpUtil.getObject("addContactNotifyListener");
   }
 
+  static int unreadCount = 0;
   /// 获取所有会话记录
   static getConversations() async {
+    unreadCount = 0;
+
     List conversations = await jmessage.getConversations().catchError((error) {});
     for (JMConversationInfo _conversationInfo in conversations) {
       if (_conversationInfo.target.username == "10000") {
         conversations.remove(_conversationInfo);
       } else {
+        unreadCount = unreadCount + _conversationInfo.unreadCount;
+        AppIconBadge.updateBadge(unreadCount);
+
         User _user = await Account.getInfoByPhone(phone: _conversationInfo.target.username);
         _conversationInfo.extras = _user.toJson();
       }
 
     }
+
     return conversations;
   }
 
@@ -194,8 +200,7 @@ class IM extends ChangeNotifier {
   static JMConversationInfo conversationInfo;
 
   static Future<void> enterConversation({phone}) async {
-    JMSingle kMockUser =
-        JMSingle.fromJson({"username": phone, "appKey": appkey});
+    JMSingle kMockUser = JMSingle.fromJson({"username": phone, "appKey": appkey});
 
     conversationInfo = await getConversation(phone: phone);
     User _user = await Account.getInfoByPhone(phone: phone);
@@ -207,11 +212,8 @@ class IM extends ChangeNotifier {
 
   /// 获取会话
   static Future<JMConversationInfo> getConversation({phone}) async {
-    JMSingle kMockUser =
-        JMSingle.fromJson({"username": phone, "appKey": appkey});
-    return await jmessage
-        .getConversation(target: kMockUser)
-        .catchError((error) async {
+    JMSingle kMockUser = JMSingle.fromJson({"username": phone, "appKey": appkey});
+    return await jmessage.getConversation(target: kMockUser).catchError((error) async {
       if (error.code == "2") {
         /// 如果获取不到会话就创建一个
         return await jmessage.createConversation(target: kMockUser);
@@ -279,11 +281,11 @@ class IM extends ChangeNotifier {
       userInfo.extras = _user.toJson();
     }
     return friends;
+
   }
 
   /// 关键字搜索用户
-  static Future<List<User>> searchKeyword(keyword,
-      {int page = 1, int limit = 15}) async {
+  static Future<List<User>> searchKeyword(keyword, {int page = 1, int limit = 15}) async {
     var url = "account/searchKeyword";
     var arguments = {"keyword": keyword, "page": page, "limit": limit};
     SBResponse response = await SBRequest.post(url, arguments: arguments);
@@ -299,9 +301,7 @@ class IM extends ChangeNotifier {
 
   /// 好友申请
   static addFriend({String phone}) async {
-    await jmessage
-        .sendInvitationRequest(username: phone, appKey: appkey, reason: "申请好友")
-        .then((action) async {
+    await jmessage.sendInvitationRequest(username: phone, appKey: appkey, reason: "申请好友").then((action) async {
       ZKCommonUtils.showToast("申请已发送");
     }).catchError((error) {
       if (error.code == "805002") {
@@ -316,9 +316,7 @@ class IM extends ChangeNotifier {
 
   /// 同意好友申请
   static Future<void> acceptInvitation({phone}) async {
-    return await jmessage
-        .acceptInvitation(username: phone, appKey: appkey)
-        .then((value) async {
+    return await jmessage.acceptInvitation(username: phone, appKey: appkey).then((value) async {
       Map _users = SpUtil.getObject("addContactNotifyListener");
       _users.remove(phone);
       await SpUtil.putObject("addContactNotifyListener", _users);
@@ -346,9 +344,7 @@ class IM extends ChangeNotifier {
 
   /// 删除好友
   static Future<void> removeFromFriendList({phone}) async {
-    await jmessage
-        .removeFromFriendList(username: phone, appKey: appkey)
-        .catchError((error) {
+    await jmessage.removeFromFriendList(username: phone, appKey: appkey).catchError((error) {
       return;
     });
 
@@ -427,19 +423,50 @@ class IM extends ChangeNotifier {
   /**
    * 发送本地通过
    */
-  static sendLocalNotification(
-      {String title = "", String subtitle = "", String content = ""}) async {
-    var fireDate = DateTime.fromMillisecondsSinceEpoch(
-        DateTime.now().millisecondsSinceEpoch + 3000);
-    var localNotification = LocalNotification(
-        id: 234,
-        title: title,
-        buildId: 1,
-        content: content,
-        fireTime: fireDate,
-        subtitle: subtitle,
-        badge: 5,
-        extra: {"fa": "0"});
-    jpush.sendLocalNotification(localNotification).then((res) {});
+  static sendLocalNotification({String title = "", String subtitle = "", String content = ""}) async {
+    // var fireDate = DateTime.fromMillisecondsSinceEpoch(
+    //     DateTime.now().millisecondsSinceEpoch + 3000);
+    // var localNotification = LocalNotification(
+    //     id: 234,
+    //     title: title,
+    //     buildId: 1,
+    //     content: content,
+    //     fireTime: fireDate,
+    //     subtitle: subtitle,
+    //     badge: 5,
+    //     extra: {"fa": "0"});
+    // jpush.sendLocalNotification(localNotification).then((res) {});
+
+
+    jpush.setTags([title, content]).then((map) {
+      var tags = map['tags'];
+
+      // 三秒后出发本地推送
+      var fireDate = DateTime.fromMillisecondsSinceEpoch(DateTime.now().millisecondsSinceEpoch + 3000);
+      var localNotification = LocalNotification(
+          id: fireDate.microsecond,
+          title: title,
+          buildId: 1,
+          content: content,
+          fireTime: fireDate,
+          subtitle: subtitle,
+          badge: tags.length,
+          extra: {"fa": "0"});
+      jpush.sendLocalNotification(localNotification).then((res) {
+
+
+      });
+
+    }).catchError((error) {
+
+    });
+
+
+
   }
+
+
+
+
+
 }

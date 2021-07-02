@@ -9,12 +9,12 @@
 //
 
 
-import 'package:one/Provider/AddresManager.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesCity.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesSwitch.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesText.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Provider/AddresManager.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesCity.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesSwitch.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesText.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';

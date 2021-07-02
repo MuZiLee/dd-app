@@ -1,20 +1,16 @@
 
-import 'package:one/Controller/TabBar/Me/BoundInvitationCode/BoundInvitationCodeViewController.dart';
-import 'package:one/Controller/TabBar/Me/MyQRCode.dart';
-import 'package:one/Controller/TabBar/Me/Personal/PersonalInfoViewController.dart';
-import 'package:one/Controller/TabBar/Me/Preferences/PreferencesViewController.dart';
-import 'package:one/Model/User.dart';
-import 'package:one/Model/VersionModel.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/SBVersionsManager.dart';
-import 'package:one/Views/CardSeries/CardHeaderTip.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/CardSeries/CardRefresherListView.dart';
-import 'package:one/Views/SBImage.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
-import 'package:one/TouchCallback.dart';
-import 'package:one/CellItem.dart';
-import 'package:one/config.dart';
+import 'package:demo2020/Controller/TabBar/Me/BoundInvitationCode/BoundInvitationCodeViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/MyQRCode.dart';
+import 'package:demo2020/Controller/TabBar/Me/Personal/PersonalInfoViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Preferences/PreferencesViewController.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Views/CardSeries/CardHeaderTip.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherListView.dart';
+import 'package:demo2020/Views/SBImage.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/TouchCallback.dart';
+import 'package:demo2020/CellItem.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
@@ -105,19 +101,17 @@ class _MeViewControllerState extends State<MeViewController> {
 
     ];
 
-    VersionModel version = SBVersionsManager.version;
-    if (version != null && version?.review == 0) {
-      /// 钱包
-      children.add(Container(
-        margin: const EdgeInsets.only(top: 20.0),
-        color: Colors.white,
-        child: Column(
-          children: <Widget>[
-            CellItem(imagePath: 'images/member/wallet.png', title: '钱包'),
-          ],
-        ),
-      ));
-    }
+
+    /// 钱包
+    children.add(Container(
+      margin: const EdgeInsets.only(top: 20.0),
+      color: Colors.white,
+      child: Column(
+        children: <Widget>[
+          CellItem(imagePath: 'images/member/wallet.png', title: '钱包'),
+        ],
+      ),
+    ));
 
 
     /**
@@ -166,7 +160,7 @@ class _MeViewControllerState extends State<MeViewController> {
           owned = owned +1;
         }
       }).toList();
-
+      c.add(CellItem(imagePath:'images/icon_search.png',title: '事件处理'));
 
       if (owned != 4) {
         c.add(CellItem(imagePath:'images/icon_public.png',title: '合伙人申请'));
@@ -187,12 +181,12 @@ class _MeViewControllerState extends State<MeViewController> {
 
       List<Widget> childes = [];
 
-      children.add(CardHeaderTip("员工"));
+      children.add(CardHeaderTip("员工服务"));
       if (Account.user?.staff.sigingInformation.cooperation_mode != "代理招聘") {
         childes.add(CellItem(imagePath:'images/member/reimbursement.png',title: '工资预算', subtitle: "通过打卡记录预算"));
       }
     childes.add(CellItem(imagePath:'images/member/workflow.png',title: '历史记录', subtitle: "工作流记录"));
-    childes.add(CellItem(imagePath:'images/member/word.png',title: '员工服务', subtitle: Account.user?.staff?.factory?.factory_name != null ? Account.user?.staff?.factory?.factory_name : "",));
+    childes.add(CellItem(imagePath:'images/member/word.png',title: '工作流', subtitle: Account.user?.staff?.factory?.factory_name != null ? Account.user?.staff?.factory?.factory_name : "",));
 
 
     children.add(Container(
@@ -231,7 +225,8 @@ class _MeViewControllerState extends State<MeViewController> {
         child: Column(
           children: <Widget>[
             CardHeaderTip("驻场老师"),
-            CellItem(imagePath:'images/member/teacher.png',title: '驻场老师服务', subtitle: Account.user.teachers.length.toString()+"家工厂",),
+            CellItem(imagePath:'images/member/teacher.png',title: '工厂管理', subtitle: Account.user.teachers.length.toString()+"家工厂",),
+            CellItem(imagePath:'images/icon_me_collect.png',title: '驻场老师提成'),
 
           ],
         ),
@@ -309,4 +304,8 @@ class _MeViewControllerState extends State<MeViewController> {
       ),
     );
   }
+
+
+
+
 }

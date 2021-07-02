@@ -2,7 +2,7 @@
 // is governed by the MIT license that can be found in the LICENSE file.
 
 import 'package:flutter_cupertino_settings/flutter_cupertino_settings.dart';
-import 'package:one/Views/card_settings/helpers/platform_functions.dart';
+import 'package:demo2020/Views/card_settings/helpers/platform_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';

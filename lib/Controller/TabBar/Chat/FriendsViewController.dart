@@ -1,14 +1,15 @@
 
-import 'package:one/Controller/TabBar/Chat/ConversationViewController.dart';
-import 'package:one/Controller/TabBar/Chat/FriendApplyListViewController.dart';
-import 'package:one/Provider/IM.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/CardSeries/CardChatTableViewCell.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/CardSeries/CardRefresherSliverList.dart';
-import 'package:one/Views/CardSeries/CardShowActionSheetController.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Controller/TabBar/Chat/ConversationViewController.dart';
+import 'package:demo2020/Controller/TabBar/Chat/FriendApplyListViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/MyResume/MyResumeViewControlle.dart';
+import 'package:demo2020/Provider/IM.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/CardSeries/CardChatTableViewCell.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherSliverList.dart';
+import 'package:demo2020/Views/CardSeries/CardShowActionSheetController.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
@@ -89,8 +90,8 @@ class _FriendsViewControllerState extends State<FriendsViewController> {
                     CupertinoActionSheetAction(
                       child: Text('查看简历', style: TextStyle(fontSize: 14)),
                       onPressed: () {
-
                         Navigator.pop(context);
+                        routePush(MyResumeViewControlle(false, username: userInfo.extras["username"]+"的", phone: userInfo.username,));
                       }
                     ),
                     CupertinoActionSheetAction(

@@ -9,15 +9,15 @@
 //
 
 
-import 'package:one/Controller/TabBar/Me/MyResume/WorkExperience/AddWorkExperienceViewController.dart';
-import 'package:one/Model/Resume.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/ResumeManager.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/CardSeries/CardRefresherListView.dart';
-import 'package:one/Views/ListViewCard.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Controller/TabBar/Me/MyResume/WorkExperience/AddWorkExperienceViewController.dart';
+import 'package:demo2020/Model/Resume.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/ResumeManager.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherListView.dart';
+import 'package:demo2020/Views/ListViewCard.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
@@ -28,7 +28,9 @@ import 'package:ovprogresshud/progresshud.dart';
 class WorkExperienceViewController extends StatefulWidget {
   static const routeName = "/tabbar/me/myresume/WorkExperience";
 
-  WorkExperienceViewController();
+  bool isShowAdd = true;
+  String phone = Account.user.phone;
+  WorkExperienceViewController(this.isShowAdd, {this.phone});
 
   @override
   _WorkExperienceViewControllerState createState() =>
@@ -41,7 +43,7 @@ class _WorkExperienceViewControllerState extends State<WorkExperienceViewControl
   static List<Work> works = [];
 
   _onRefresh() async{
-    Resume resume = await ResumeManager.get();
+    Resume resume = await ResumeManager.get(widget.phone);
     works = resume.work;
     setState(() {
 
@@ -54,7 +56,7 @@ class _WorkExperienceViewControllerState extends State<WorkExperienceViewControl
     return BaseScaffold(
       title: "工作经历",
       actions: <Widget>[
-        Container(
+        widget.isShowAdd == true ? Container(
           padding: EdgeInsets.all(10),
           child: RaisedButton(
             color: selectedIconColor,
@@ -65,7 +67,7 @@ class _WorkExperienceViewControllerState extends State<WorkExperienceViewControl
               });
             },
           ),
-        )
+        ) : Container()
       ],
       child: CardRefresher(
         onRefresh: _onRefresh,

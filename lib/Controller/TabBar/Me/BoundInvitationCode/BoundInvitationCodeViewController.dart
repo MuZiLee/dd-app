@@ -10,12 +10,13 @@
 
 import 'dart:ui';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:one/Model/User.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Model/User.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:nav_router/nav_router.dart';
 import 'package:ovprogresshud/progresshud.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -50,7 +51,7 @@ class _BoundInvitationCodeViewControllerState extends State<BoundInvitationCodeV
       btnOkText: "绑定",
       btnOkColor: Colors.green,
       btnCancelText: "返回",
-      tittle: user.username,
+      title: user.username,
       desc:   user.phone,
       btnCancelOnPress: () {},
       btnOkOnPress: () async{
@@ -60,9 +61,9 @@ class _BoundInvitationCodeViewControllerState extends State<BoundInvitationCodeV
           return;
         }
         if (await Account.bindInvitationCode(code: currentText)) {
-          ZKCommonUtils.showToast("升级成为会员!");
+          ZKCommonUtils.showToast("亲，绑定成功请刷新页面数据!");
           setState(() {
-
+            pop();
           });
         }
       },

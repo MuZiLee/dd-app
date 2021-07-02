@@ -1,10 +1,10 @@
 // Copyright (c) 2018, codegrue. All rights reserved. Use of this source code
 // is governed by the MIT license that can be found in the LICENSE file.
 
-import 'package:one/Views/card_settings/flutter_material_pickers/dialogs/responsive_dialog.dart';
+import 'package:demo2020/Views/card_settings/flutter_material_pickers/dialogs/responsive_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:one/Views/card_settings/flutter_material_pickers/dialogs/responsive_dialog.dart';
+import 'package:demo2020/Views/card_settings/flutter_material_pickers/dialogs/responsive_dialog.dart';
 
 /// Extends Dialog by making it responsive to screen orientation changes
 void showMaterialResponsiveDialog({

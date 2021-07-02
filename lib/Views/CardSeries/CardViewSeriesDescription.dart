@@ -1,5 +1,5 @@
 
-import 'package:one/Views/CardSeries/CardTextView.dart';
+import 'package:demo2020/Views/CardSeries/CardTextView.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

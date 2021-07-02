@@ -1,7 +1,7 @@
 
 import 'dart:io';
 import 'package:common_utils/common_utils.dart';
-import 'package:one/Views/CardSeries/CardSeriesUnread.dart';
+import 'package:demo2020/Views/CardSeries/CardSeriesUnread.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

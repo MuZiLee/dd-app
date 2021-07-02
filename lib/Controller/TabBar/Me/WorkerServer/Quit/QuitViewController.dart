@@ -1,14 +1,19 @@
+import 'dart:math';
 
-import 'package:one/Provider/StaffManager.dart';
-import 'package:one/Views/Bases/BaseScaffold.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesDate.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesText.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesTextView.dart';
-import 'package:one/Views/MyBehavior.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Provider/StaffManager.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Views/CardSeries/CardViewRatingBar.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesDate.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesEmptyCell.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesSwitch.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesText.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesTextView.dart';
+import 'package:demo2020/Views/MyBehavior.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'dart:io';
 
 import 'package:nav_router/nav_router.dart';
 
@@ -87,10 +92,10 @@ class _QuitViewControllerState extends State<QuitViewController> {
                   allowHalfRating: true,//允许0.5评分
                   itemCount: 5,//评分组件个数
                   itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                  // itemBuilder: (context, _) => Icon(
-                  //   Icons.star,
-                  //   color: Colors.amber,
-                  // ),
+                  itemBuilder: (context, _) => Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
                   onRatingUpdate: (rating) {
                     setState(() {
                       _value = rating;

@@ -1,6 +1,11 @@
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/SBRequest/SBRequest.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'dart:convert';
+
+import 'package:demo2020/Model/ApplyHistoryModel.dart';
+import 'package:demo2020/Model/EventPartnerAudit.dart';
+import 'package:demo2020/Model/EventsStaff.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/SBRequest/SBRequest.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/foundation.dart';
 import 'package:nav_router/nav_router.dart';
 
@@ -79,6 +84,22 @@ class EventsManager extends ChangeNotifier {
     } else {
       return false;
     }
+  }
+
+  static getJobEvents({
+    uid
+  }) async{
+    var url = "events/getJobEvents";
+    var arguments = {
+      "uid": uid
+    };
+    SBResponse response = await SBRequest.post(url, arguments: arguments);
+    List events = [];
+
+    response.data.map((json) {
+      events.add(ApplyHistoryModel.fromJson(json));
+    }).toList();
+    return events;
   }
 
 }

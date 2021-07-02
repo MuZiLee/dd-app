@@ -1,9 +1,13 @@
 
-import 'package:one/Model/EventsStaff.dart';
-import 'package:one/Provider/StaffManager.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Model/EventModel.dart';
+import 'package:demo2020/Model/EventsStaff.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/EventsManager.dart';
+import 'package:demo2020/Provider/StaffManager.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/CardSeries/CardViewPictureBrowse.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
@@ -12,6 +16,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 /// 历史记录
 class HistoryNodeViewController extends StatefulWidget {
   static const routeName = "/me/historyNode";
+
 
   @override
   _HistoryNodeViewControllerState createState() =>
@@ -43,6 +48,7 @@ class _HistoryNodeViewControllerState extends State<HistoryNodeViewController> {
    */
   _onRefresh() async {
     events = await StaffManager.workflowHistory();
+
     setState(() {});
   }
 
@@ -285,7 +291,7 @@ class _HistoryNodeViewControllerState extends State<HistoryNodeViewController> {
                         padding: EdgeInsets.all(0.0),
                       ),
                       onTap: () {
-                        // routePush(CardViewPictureBrowse(event.images));
+                        routePush(CardViewPictureBrowse(event.images));
                       },
                     ),
                   )

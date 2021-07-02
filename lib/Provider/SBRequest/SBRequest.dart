@@ -1,8 +1,6 @@
-import 'dart:convert';
-import 'dart:io';
 
-import 'package:one/config.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/config.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ovprogresshud/progresshud.dart';
@@ -33,6 +31,7 @@ class SBRequest extends ChangeNotifier {
     BaseOptions options = BaseOptions(
         baseUrl: Config.BASE_URL + "/api/",
         headers: {"token": token != null ? token : ""});
+    print(options.baseUrl);
     Dio dio = new Dio(options);
 
     try {
@@ -46,6 +45,7 @@ class SBRequest extends ChangeNotifier {
       }
       print("************ post请求出错**********");
       print(e?.request);
+      var res = e.response.data;
       print(url);
       print("message:" + e?.message);
       print("⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡⇡");

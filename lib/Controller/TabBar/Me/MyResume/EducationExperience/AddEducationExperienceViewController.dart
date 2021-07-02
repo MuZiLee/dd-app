@@ -8,16 +8,17 @@
 //  版权所有 © 2019。 保留所有权利
 //
 
-import 'package:one/Model/Resume.dart';
-import 'package:one/Provider/ResumeManager.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesEducation.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesDate.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesHeader.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesText.dart';
+import 'package:demo2020/Model/Resume.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/ResumeManager.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesEducation.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesDate.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesHeader.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesText.dart';
+import 'package:demo2020/Views/card_settings/widgets/card_settings_panel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:one/Views/card_settings/card_settings.dart';
 
 
 /// 添加 编辑 教育经历
@@ -60,43 +61,48 @@ class _AddEducationExperienceViewControllerState extends State<AddEducationExper
           ),
         )
       ],
-      child: CardSettings(
-        // padding: 0,
-        children: <Widget>[
-          CardViewSeriesHeader(
-            title: "*添加教育经历",
-          ),
-          CardViewSeriesEducation(
-            title: "学历",
-            isNotNull: true,
-//            subtitle: educationex?.education != null ? educationex.education : "选择学历",
-            onConfirm: (value) => educationex.education = value,
-          ),
-          CardViewSeriesText(
-            title: "毕业学校",
-            placeholder: "学校名称",
-            isNotNull: true,
-            onChanged: (value) => educationex.school = value,
-          ),
-          CardViewSeriesDate(
-            title: "毕业时间",
-            isNotNull: true,
-            maxTime: new DateTime.now(),
-            minTime: DateTime(1949,9,9),
-            valueChanged: (DateTime dateTime) {
-              educationex.graduation_time = "${dateTime.year}" +"-"+ "${dateTime.month}" +"-"+ "${dateTime.day}";
-            },
-          ),
-          CardViewSeriesText(
-            title: "所学专业:",
-            isNotNull: true,
-            placeholder: "专业名称",
-            onChanged: (value) => educationex.major = value,
-          ),
-
-        ],
+      child: SingleChildScrollView(
+        child: buildCardSettings()
       ),
 
+    );
+  }
+
+  buildCardSettings() {
+    return Column(
+      children: <Widget>[
+        CardViewSeriesHeader(
+          title: "*添加教育经历",
+        ),
+        CardViewSeriesEducation(
+          title: "学历",
+          isNotNull: true,
+//            subtitle: educationex?.education != null ? educationex.education : "选择学历",
+          onConfirm: (value) => educationex.education = value,
+        ),
+        CardViewSeriesText(
+          title: "毕业学校",
+          placeholder: "学校名称",
+          isNotNull: true,
+          onChanged: (value) => educationex.school = value,
+        ),
+        CardViewSeriesDate(
+          title: "毕业时间",
+          isNotNull: true,
+          maxTime: new DateTime.now(),
+          minTime: DateTime(1949,9,9),
+          valueChanged: (DateTime dateTime) {
+            educationex.graduation_time = "${dateTime.year}" +"-"+ "${dateTime.month}" +"-"+ "${dateTime.day}";
+          },
+        ),
+        CardViewSeriesText(
+          title: "所学专业:",
+          isNotNull: true,
+          placeholder: "专业名称",
+          onChanged: (value) => educationex.major = value,
+        ),
+
+      ],
     );
   }
 }

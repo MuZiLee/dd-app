@@ -1,12 +1,15 @@
 
 
-import 'package:one/Provider/IM.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/CardSeries/CardChatTableViewCell.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/CardSeries/CardRefresherListView.dart';
-import 'package:one/Views/CardSeries/CardShowActionSheetController.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Model/FriendsModel.dart';
+import 'package:demo2020/Model/User.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/IM.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/CardSeries/CardChatTableViewCell.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherListView.dart';
+import 'package:demo2020/Views/CardSeries/CardShowActionSheetController.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jmessage_flutter/jmessage_flutter.dart';
@@ -23,14 +26,15 @@ class _FriendApplyListViewControllerState extends State<FriendApplyListViewContr
 
   List users = [];
 
-  _onRefresh() {
+  _onRefresh() async{
     users = [];
 
-    IM.getFriendApply().forEach((key, value) {
-
-
-//      users.add(JMUserInfo.fromJson(value));
-    });
+//     IM.getFriendApply().forEach((key, value) {
+//
+//
+// //      users.add(JMUserInfo.fromJson(value));
+//     });
+    users = await Account.getFriends();
     setState(() {
     });
   }
@@ -45,15 +49,15 @@ class _FriendApplyListViewControllerState extends State<FriendApplyListViewContr
         child: users.length > 0 ? CardRefresherListView(
           itemCount: users.length,
           itemBuilder: (_, index) {
-            JMUserInfo userInfo = users[index];
+            FriendsModel model = users[index];
 
             return CardChatTableViewCell(
-              title: userInfo.nickname,
-              subTitle: userInfo.username,
+              title: model.user.username,
+              subTitle: model.user.phone,
               trailing: IconButton(
                 icon: Icon(Icons.more_vert),
               ),
-              onTap: () => _onTap(userInfo),
+              onTap: () => _onTap(model),
             );
           },
         ) : Error404View(),
@@ -61,7 +65,7 @@ class _FriendApplyListViewControllerState extends State<FriendApplyListViewContr
     );
   }
 
-  _onTap(JMUserInfo userInfo) async{
+  _onTap(FriendsModel model) async{
 
     CardShowActionSheetController(
       context,
@@ -71,14 +75,14 @@ class _FriendApplyListViewControllerState extends State<FriendApplyListViewContr
         CupertinoActionSheetAction(
             child: Text('拒绝', style: TextStyle(fontSize: 14)),
             onPressed: () {
-              _onPressed(false, userInfo: userInfo);
+              _onPressed(false, model: model);
               Navigator.pop(context);
             }
         ),
         CupertinoActionSheetAction(
             child: Text('同意', style: TextStyle(fontSize: 14)),
             onPressed: () {
-              _onPressed(true, userInfo: userInfo);
+              _onPressed(true, model: model);
               Navigator.pop(context);
             }
         ),
@@ -86,14 +90,16 @@ class _FriendApplyListViewControllerState extends State<FriendApplyListViewContr
     );
   }
 
-  _onPressed(bool event, {JMUserInfo userInfo}) async {
+  _onPressed(bool event, {FriendsModel model}) async {
 
     if (event == true) {
       /// 同意
-      await IM.acceptInvitation(phone: userInfo.username);
+      await IM.acceptInvitation(phone: model.user.phone);
+      await Account.acceptInvitation(model: model);
     } else {
       /// 拒绝
-      await IM.declineInvitation(phone: userInfo.username);
+      await IM.removeFromFriendList(phone: model.user.phone);
+      await Account.declineInvitation(model: model);
     }
     _onRefresh();
   }

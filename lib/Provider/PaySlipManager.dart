@@ -1,7 +1,7 @@
 
-import 'package:one/Model/EventsPaySlip.dart';
-import 'package:one/Provider/SBRequest/SBRequest.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Model/EventsPaySlip.dart';
+import 'package:demo2020/Provider/SBRequest/SBRequest.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ovprogresshud/progresshud.dart';
 
@@ -25,6 +25,14 @@ class PaySlipManager extends ChangeNotifier {
     } else {
       return false;
     }
+  }
+
+  static findHour(uid) async {
+    var url = "paySlip/findHour";
+
+    SBResponse response = await SBRequest.post(url, arguments: {"uid": uid});
+
+    return response.data;
   }
 
   /**

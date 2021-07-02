@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:one/Model/FImage.dart';
-import 'package:one/Provider/Location.dart';
-import 'package:one/config.dart';
+import 'package:demo2020/Model/FImage.dart';
+import 'package:demo2020/Provider/Location.dart';
+import 'package:demo2020/config.dart';
 
 class JobModel {
   String arithmetic_requirements;

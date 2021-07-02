@@ -1,11 +1,11 @@
 
-import 'package:one/Controller/TabBar/Home/Announcement/ReadDetailsViewController.dart';
-import 'package:one/Model/ArticlesModel.dart';
-import 'package:one/Provider/ArticleManager.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
-import 'package:one/Views/CardSeries/CardRefresherListView.dart';
-import 'package:one/Views/SBImage.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Controller/TabBar/Home/Announcement/ReadDetailsViewController.dart';
+import 'package:demo2020/Model/ArticlesModel.dart';
+import 'package:demo2020/Provider/ArticleManager.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherListView.dart';
+import 'package:demo2020/Views/SBImage.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
 
@@ -77,6 +77,7 @@ class _ArticleListViewControllerState extends State<ArticleListViewController> {
                         SizedBox(width: 32.0),
                         Container(
                           padding: EdgeInsets.only(right: 5.0),
+                          // ignore: deprecated_member_use
                           child: RaisedButton(
                             child: Text("购买"),
                             onPressed: () async{
@@ -92,7 +93,7 @@ class _ArticleListViewControllerState extends State<ArticleListViewController> {
                 ),
                 onTap: () {
 
-                  routePush(ReadDetailsViewController(model.id, model.title));
+                  // routePush(ReadDetailsViewController(model.id, model.title));
                 },
               ),
             ),

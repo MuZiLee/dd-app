@@ -1,7 +1,7 @@
 
-import 'package:one/Model/ArticlesModel.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
-import 'package:one/config.dart';
+import 'package:demo2020/Model/ArticlesModel.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/config.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 

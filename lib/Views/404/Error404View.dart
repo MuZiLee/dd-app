@@ -9,7 +9,7 @@
 //
 
 import 'dart:ui';
-import 'package:one/Views/SBImage.dart';
+import 'package:demo2020/Views/SBImage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as prefix0;
 

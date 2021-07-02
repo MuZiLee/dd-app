@@ -1,9 +1,9 @@
 
-import 'package:one/Model/EventsStaff.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/EventsManager.dart';
-import 'package:one/Provider/SBRequest/SBRequest.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Model/EventsStaff.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/EventsManager.dart';
+import 'package:demo2020/Provider/SBRequest/SBRequest.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:ovprogresshud/progresshud.dart';
 
 class StaffManager {
@@ -107,15 +107,83 @@ class StaffManager {
    * 打卡
    */
   static punch_the_clock({double hour}) async {
+
+    var partner = Account.user.partner;
+    var staff = Account.user.staff;
+
+    var uid = Account.user.id;
+    var fid = Account.user.staff.factory.id;
+    var jid = Account.user.staff.job.id;
+    var remark = "";
+    var status;
+    var signBill;
+    var staffBill;
+    var teacherBill;
+    var salesmanBill;
+    var primaryBill;
+    var advancedBill;
+    var strategicBill;
+    var dandanBill;
+
+
+    var teacherId;
+    var salesmanId;
+    var primaryId;
+    var advancedId;
+    var strategicId;
+
+
+    SBResponse signingInfo = await SBRequest.post("factory/getSigningInfo", arguments:{"fid": fid});
+    SBResponse strategicInfo = await SBRequest.post("account/getStrategicInfo", arguments:{"pid": partner.user.id});
+    SBResponse advancedInfo = await SBRequest.post("account/getPrimaryId", arguments:{"uid": partner.user.id});
+    SBResponse teacherInfo = await SBRequest.post("factory/getTeacherByFid", arguments:{"fid": fid});
+    if (signingInfo.code == 0 && strategicInfo.code == 0) {
+      signBill = signingInfo.data["signed_unit_price"];
+      staffBill = signingInfo.data["employee_unit_price"];
+      teacherBill = signingInfo.data["commission_for_teacher"];
+      salesmanBill = signingInfo.data["commission_for_salesman"];
+
+      primaryBill = strategicInfo.data["jp_dividend"];
+      advancedBill = strategicInfo.data["sp_dividend"];
+      strategicBill = strategicInfo.data["sa_dividend"];
+      dandanBill = strategicInfo.data["dd_dividend"];
+
+      teacherId = teacherInfo.data["uid"];//驻场老师ID
+      salesmanId = signingInfo.data["salesmanId"];//业务员ID
+      primaryId = partner.user.id;
+      advancedId = advancedInfo.data["pid"];
+      strategicId = advancedInfo.data["strategicId"];
+
+
+    } else {
+      return false;
+    }
+
     var url = "staff/addFlow";
     var arguments = {
       "fid": Account.user.staff.factory.id,
       "jid": Account.user.staff.job.id,
-
-
       "hour": hour,
-      "etid": EventsManager.punch_the_clock
+      "etid": EventsManager.punch_the_clock,
+      "uid": Account.user.id,
+      "bill" : {
+        "signBill":signBill
+        ,"staffBill":staffBill
+        ,"teacherBill":teacherBill
+        ,"salesmanBill":salesmanBill
+        ,"primaryBill":primaryBill
+        ,"advancedBill":advancedBill
+        ,"strategicBill":strategicBill
+        ,"dandanBill":dandanBill
+        ,"teacherId":teacherId
+        ,"salesmanId":salesmanId
+        ,"primaryId":primaryId
+        ,"advancedId":advancedId
+        ,"strategicId":strategicId
+      }
     };
+
+
     SBResponse response = await SBRequest.post(url, arguments: arguments);
     if (response.code == 0) {
       return true;

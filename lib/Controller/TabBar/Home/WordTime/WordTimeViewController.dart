@@ -12,13 +12,13 @@ import 'dart:async';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:date_format/date_format.dart';
-import 'package:one/Controller/TabBar/Me/WorkerServer/SalaryBudget/SalaryBudgetViewController.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/StaffManager.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesBottomSheet.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
-import 'package:one/Views/keyboard/BlankToolBarTool.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Controller/TabBar/Me/WorkerServer/SalaryBudget/SalaryBudgetViewController.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/StaffManager.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesBottomSheet.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Views/keyboard/BlankToolBarTool.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
@@ -68,6 +68,7 @@ class _WordTimeViewControllerState extends State<WordTimeViewController> {
         elevation: 0.0,
         child: BlankToolBarTool.blankToolBarWidget(
           context,
+          showToolBar: false,
           model: blankToolBarModel,
           body: SingleChildScrollView(
             child: buildContainer(focusNode, context),
@@ -152,7 +153,7 @@ class _WordTimeViewControllerState extends State<WordTimeViewController> {
                               btnOkColor: Colors.blueAccent,
                               btnCancelText: "返回",
                               btnCancelColor: Colors.grey,
-                              tittle: "录入完成",
+                              title: "录入完成",
                               desc: "亲,您要去查看一下工资的预算情况吗?",
                               btnOkOnPress: () {
                                 routePush(SalaryBudgetViewController()).then((value) => pop());

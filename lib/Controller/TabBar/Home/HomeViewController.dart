@@ -1,34 +1,38 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:date_format/date_format.dart';
-import 'package:one/Common/HomeFunctions.dart';
-import 'package:one/Controller/TabBar/Home/Announcement/AnnouncementListViewController.dart';
-import 'package:one/Controller/TabBar/Home/Announcement/ArticleListViewController.dart';
-import 'package:one/Controller/TabBar/Home/JobAdItem.dart';
-import 'package:one/Controller/TabBar/Home/JobItem.dart';
-import 'package:one/Controller/TabBar/Home/Search/JobsSearchViewController.dart';
-import 'package:one/Controller/TabBar/Home/Shop/ShopViewController.dart';
-import 'package:one/Controller/TabBar/Home/WordTime/WordTimeViewController.dart';
-import 'package:one/Controller/WebBrowser/WebBrowserViewController.dart';
-import 'package:one/Model/AdModel.dart';
-import 'package:one/Model/JobModel.dart';
-import 'package:one/Provider/API.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Provider/FactoryManager.dart';
-import 'package:one/Provider/Location.dart';
-import 'package:one/Provider/ShopManager.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/CardSeries/CardHeaderTip.dart';
-import 'package:one/Views/CardSeries/CardRefresherGridView.dart';
-import 'package:one/Views/CardSeries/CardRefresherListView.dart';
-import 'package:one/Views/SBImage.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
-import 'package:one/config.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Common/HomeFunctions.dart';
+import 'package:demo2020/Controller/TabBar/Home/Announcement/AnnouncementListViewController.dart';
+import 'package:demo2020/Controller/TabBar/Home/Announcement/ArticleListViewController.dart';
+import 'package:demo2020/Controller/TabBar/Home/JobAdItem.dart';
+import 'package:demo2020/Controller/TabBar/Home/JobItem.dart';
+import 'package:demo2020/Controller/TabBar/Home/Search/JobsSearchViewController.dart';
+import 'package:demo2020/Controller/TabBar/Home/Shop/ShopViewController.dart';
+import 'package:demo2020/Controller/TabBar/Home/WordTime/WordTimeViewController.dart';
+import 'package:demo2020/Controller/WebBrowser/WebBrowserViewController.dart';
+import 'package:demo2020/Model/AdModel.dart';
+import 'package:demo2020/Model/JobModel.dart';
+import 'package:demo2020/Provider/API.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/FactoryManager.dart';
+import 'package:demo2020/Provider/Location.dart';
+import 'package:demo2020/Provider/ShopManager.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/CardSeries/CardHeaderTip.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherGridView.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherListView.dart';
+import 'package:demo2020/Views/SBImage.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Views/city_select_page.dart';
+import 'package:demo2020/config.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_amap_location_plugin/amap_location_option.dart';
+import 'package:flutter_amap_location_plugin/flutter_amap_location_plugin.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:location_service_check/location_service_check.dart';
 import 'package:nav_router/nav_router.dart';
 import 'package:ovprogresshud/progresshud.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -39,7 +43,10 @@ class HomeViewController extends StatefulWidget {
 }
 
 class _HomeViewControllerState extends State<HomeViewController> {
-  RefreshController _refreshController = new RefreshController(initialRefresh: true);
+  RefreshController _refreshController =
+      new RefreshController(initialRefresh: true);
+
+  String city = Location.city;
 
   JobType selectType = JobType(
     id: 1,
@@ -60,14 +67,23 @@ class _HomeViewControllerState extends State<HomeViewController> {
       soty: selectType.sort,
       isHot: selectType.isHot,
       minimum_search_range: selectType.minimum_search_range,
-      maximum_salary_range: selectType.maximum_salary_range,
+      // maximum_salary_range: selectType.maximum_salary_range,
+      city: city
     );
-    setState(() {});
+    if (widget != null) {
+      setState(() {});
+    }
   }
 
   @override
-  void didChangeDependencies() {
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() async {
     super.didChangeDependencies();
+    await Location.updateCurrentLocations(false);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   }
 
@@ -108,9 +124,8 @@ class _HomeViewControllerState extends State<HomeViewController> {
                   await ShopManager.getBannerlist();
                   routePush(ShopViewController());
                 } else if (item["title"] == "天天金蛋") {
-                  var url = Config.BASE_URL +
-                      "/signin/index.html?id=" +
-                      Account.user.id.toString();
+                  var url = Config.BASE_URL + "/signIn/?uid=" + Account.user.id.toString();
+                  print(url);
                   routePush(WebBrowserViewController(title: "天天金蛋", url: url));
                 } else if (item["title"] == "公告") {
                   routePush(AnnouncementListViewController());
@@ -225,7 +240,7 @@ class _HomeViewControllerState extends State<HomeViewController> {
         return Container(
           padding: EdgeInsets.all(64),
           child: Error404View(
-            text: Account.user.staff == null ? "没有数据" : "已入职",
+            text: Account.user.staff == null ? "当前城市没有数据" : "已入职",
           ),
         );
       }, childCount: 1));
@@ -241,7 +256,14 @@ class _HomeViewControllerState extends State<HomeViewController> {
     return BaseScaffold(
       title: "首页",
       actions: <Widget>[
-        CitySwitchButton(cityName: Location.amap?.city),
+        CitySwitchButton(
+          cityName: Location.city,
+          onHighlightChanged: (data) async{
+            city = data;
+            await _onRefresh();
+
+          },
+        ),
       ],
       child: CupertinoScrollbar(
         child: LayoutBuilder(
@@ -285,9 +307,7 @@ class _HomeViewControllerState extends State<HomeViewController> {
               color: Color.fromRGBO(200, 200, 200, 0.5),
               activeColor: Colors.deepOrange,
               size: 8.0,
-              activeSize: 10.0
-          )
-      ),
+              activeSize: 10.0)),
     );
   }
 
@@ -373,8 +393,9 @@ class _HomeViewControllerState extends State<HomeViewController> {
 
 class CitySwitchButton extends StatefulWidget {
   String cityName;
+  ValueChanged<String> onHighlightChanged;
 
-  CitySwitchButton({this.cityName}) {
+  CitySwitchButton({this.cityName, this.onHighlightChanged}) {
     if (this.cityName == null) {
       this.cityName = "未知位置";
     }
@@ -408,11 +429,24 @@ class _CitySwitchButtonState extends State<CitySwitchButton> {
         ),
       ),
       onTap: () async {
-        await Location.updateCurrentLocations();
-        ZKCommonUtils.showToast("位置已更新");
+        routePush(CityListPage(
+          onHighlightChanged: (city) async{
+            Location.city = city;
+            setState(() {
+              widget.cityName = Location.city ?? "未知位置";
+              widget.onHighlightChanged(city);
+            });
+          },
+        ));
+
+        bool open = await LocationServiceCheck.checkLocationIsOpen;
+        if (!open) {
+          await LocationServiceCheck.openLocationSetting;
+        }
+
+        await Location.updateCurrentLocations(true);
         setState(() {
-          widget.cityName =
-              Location.amap?.city != null ? Location.amap?.city : "未知位置";
+          widget.cityName = Location.city ?? "未知位置";
         });
       },
     );

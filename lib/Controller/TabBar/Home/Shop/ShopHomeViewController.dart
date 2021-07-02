@@ -1,13 +1,14 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:one/Controller/TabBar/Home/Shop/ShopDetailsViewController.dart';
-import 'package:one/Controller/TabBar/Home/Shop/ShopGoodsViewController.dart';
-import 'package:one/Model/ShopCategory.dart';
-import 'package:one/Model/ShopNavitems.dart';
-import 'package:one/Model/ShopProductsModel.dart';
-import 'package:one/Provider/ShopManager.dart';
-import 'package:one/Views/CardSeries/CardRefresherGridView.dart';
-import 'package:one/Views/SBImage.dart';
+import 'package:demo2020/Controller/TabBar/Home/Shop/ShopDetailsViewController.dart';
+import 'package:demo2020/Controller/TabBar/Home/Shop/ShopGoodsSearchViewController.dart';
+import 'package:demo2020/Controller/TabBar/Home/Shop/ShopGoodsViewController.dart';
+import 'package:demo2020/Model/ShopCategory.dart';
+import 'package:demo2020/Model/ShopNavitems.dart';
+import 'package:demo2020/Model/ShopProductsModel.dart';
+import 'package:demo2020/Provider/ShopManager.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresherGridView.dart';
+import 'package:demo2020/Views/SBImage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
@@ -35,6 +36,35 @@ class _ShopHomeViewControllerState extends State<ShopHomeViewController> {
 
 
     List<Widget> slivers = [];
+
+    /// 搜索职位
+    SliverToBoxAdapter searchBar = SliverToBoxAdapter(
+      child: InkWell(
+        child: Container(
+          margin: EdgeInsets.all(5),
+          padding: EdgeInsets.all(5),
+          child: ClipRRect(
+            child: Container(
+              height: 42,
+              padding: EdgeInsets.all(5),
+              color: Colors.black12,
+              child: Row(
+                children: <Widget>[
+                  Icon(Icons.search),
+                  Text("商城搜索"),
+                ],
+              ),
+            ),
+            borderRadius: BorderRadius.all(Radius.circular(100.0)),
+          ),
+        ),
+        onTap: () {
+          routePush(ShopGoodsSearchViewController());
+
+        },
+      ),
+    );
+    slivers.add(searchBar);
 
     /// banner
     SliverFixedExtentList header = SliverFixedExtentList(
@@ -68,7 +98,7 @@ class _ShopHomeViewControllerState extends State<ShopHomeViewController> {
         childCount: items.length <= 8 ? items.length : 8,
       ),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4, mainAxisSpacing: 10.0, crossAxisSpacing: 1.0),
+          crossAxisCount: 4, mainAxisSpacing: 20.0, crossAxisSpacing: 1.0),
     );
     slivers.add(grid);
 
@@ -82,7 +112,7 @@ class _ShopHomeViewControllerState extends State<ShopHomeViewController> {
           child: Column(
             children: [
               Text("新品推荐"),
-              Image.asset("images/shop/line_botm.jpg")
+              Image.asset("images/line_botm.jpg")
             ],
           ),
         ),

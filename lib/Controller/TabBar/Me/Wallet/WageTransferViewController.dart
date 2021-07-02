@@ -1,8 +1,8 @@
-import 'package:one/Controller/TabBar/Me/Wallet/RollOutViewController.dart';
-import 'package:one/Controller/TabBar/Me/Wallet/RollOutWageViewController.dart';
-import 'package:one/Provider/PaySlipManager.dart';
-import 'package:one/Views/Bases/BaseScaffold.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Controller/TabBar/Me/Wallet/RollOutViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Wallet/RollOutWageViewController.dart';
+import 'package:demo2020/Provider/PaySlipManager.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';

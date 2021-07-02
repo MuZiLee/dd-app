@@ -1,16 +1,16 @@
 
 import 'package:common_utils/common_utils.dart';
-import 'package:one/Controller/TabBar/Chat/ConversationViewController.dart';
-import 'package:one/Controller/TabBar/Home/Shop/ShopCartViewController.dart';
-import 'package:one/Controller/TabBar/SBTabbarViewController.dart';
-import 'package:one/Model/ShopProductsModel.dart';
-import 'package:one/Provider/AddresManager.dart';
-import 'package:one/Provider/IM.dart';
-import 'package:one/Provider/ShopManager.dart';
-import 'package:one/Provider/ShopProviders.dart';
-import 'package:one/Views/Bases/BaseScaffold.dart';
-import 'package:one/Views/SBImage.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Controller/TabBar/Chat/ConversationViewController.dart';
+import 'package:demo2020/Controller/TabBar/Home/Shop/ShopCartViewController.dart';
+import 'package:demo2020/Controller/TabBar/SBTabbarViewController.dart';
+import 'package:demo2020/Model/ShopProductsModel.dart';
+import 'package:demo2020/Provider/AddresManager.dart';
+import 'package:demo2020/Provider/IM.dart';
+import 'package:demo2020/Provider/ShopManager.dart';
+import 'package:demo2020/Provider/ShopProviders.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Views/SBImage.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -52,6 +52,11 @@ class _ShopDetailsViewControllerState extends State<ShopDetailsViewController> {
       DateTime dateTime = DateTime.parse(widget.productsModel.create_time);
       timestamp = TimelineUtil.formatByDateTime(dateTime, locale: 'zh').toString();
     }
+
+    if (widget.productsModel.user.username == "" || widget.productsModel.user.username == null) {
+      widget.productsModel.user.username = "*无名";
+    }
+
     SliverToBoxAdapter tpl = SliverToBoxAdapter(
       child: Column(
 

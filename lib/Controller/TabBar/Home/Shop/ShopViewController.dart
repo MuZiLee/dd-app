@@ -1,9 +1,9 @@
-import 'package:one/Controller/TabBar/Home/Shop/Addres/AddressManagerViewController.dart';
-import 'package:one/Controller/TabBar/Home/Shop/ShopCartViewController.dart';
-import 'package:one/Controller/TabBar/Home/Shop/ShopCategoryViewController.dart';
-import 'package:one/Controller/TabBar/Home/Shop/ShopHomeViewController.dart';
-import 'package:one/Provider/AddresManager.dart';
-import 'package:one/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Controller/TabBar/Home/Shop/Addres/AddressManagerViewController.dart';
+import 'package:demo2020/Controller/TabBar/Home/Shop/ShopCartViewController.dart';
+import 'package:demo2020/Controller/TabBar/Home/Shop/ShopCategoryViewController.dart';
+import 'package:demo2020/Controller/TabBar/Home/Shop/ShopHomeViewController.dart';
+import 'package:demo2020/Provider/AddresManager.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';

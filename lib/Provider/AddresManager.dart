@@ -1,7 +1,7 @@
 
 
-import 'package:one/Model/AddresModel.dart';
-import 'package:one/Provider/SBRequest/SBRequest.dart';
+import 'package:demo2020/Model/AddresModel.dart';
+import 'package:demo2020/Provider/SBRequest/SBRequest.dart';
 import 'package:flutter/cupertino.dart';
 
 /**

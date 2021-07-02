@@ -1,11 +1,11 @@
 
-import 'package:one/Model/EventsPaySlipEpfew.dart';
-import 'package:one/Model/PartenerPvivot.dart';
-import 'package:one/Provider/PaySlipManager.dart';
-import 'package:one/Views/404/Error404View.dart';
-import 'package:one/Views/Bases/BaseScaffold.dart';
-import 'package:one/Views/SBImage.dart';
-import 'package:one/Views/ThemeButton.dart';
+import 'package:demo2020/Model/EventsPaySlipEpfew.dart';
+import 'package:demo2020/Model/PartenerPvivot.dart';
+import 'package:demo2020/Provider/PaySlipManager.dart';
+import 'package:demo2020/Views/404/Error404View.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Views/SBImage.dart';
+import 'package:demo2020/Views/ThemeButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';

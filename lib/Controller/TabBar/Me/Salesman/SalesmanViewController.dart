@@ -1,7 +1,8 @@
-import 'package:one/CellItem.dart';
-import 'package:one/Controller/TabBar/Me/Partner/EnterpriseCommission/EnterpriseCommissionViewController.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/CellItem.dart';
+import 'package:demo2020/Controller/TabBar/Me/Partner/EnterpriseCommission/EnterpriseCommissionViewController.dart';
+import 'package:demo2020/Controller/TabBar/Me/Partner/EnterpriseCommission/SalesmanEnterpriseCommissionViewController.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
@@ -27,9 +28,9 @@ class _SalesmanViewControllerState extends State<SalesmanViewController> {
           children: <Widget>[
             CellItem(
               imagePath: 'images/icon_link.png',
-              title: '企业佣金',
+              title: '业务员提成',
               onPressed: () {
-                routePush(EnterpriseCommissionViewController(rid: Account.salesman));
+                routePush(SalesmanEnterpriseCommissionViewController());
               },
             ),
           ],

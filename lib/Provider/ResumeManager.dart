@@ -1,12 +1,12 @@
-import 'package:one/Model/Resume.dart';
-import 'package:one/Provider/SBRequest/SBRequest.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Model/Resume.dart';
+import 'package:demo2020/Provider/SBRequest/SBRequest.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:nav_router/nav_router.dart';
 
 class ResumeManager {
-  static get() async {
+  static get(phone) async {
     var url = "resumes/get";
-    SBResponse response = await SBRequest.post(url);
+    SBResponse response = await SBRequest.post(url, arguments: {"phone":phone});
     if (response.code == 0) {
       Resume resume = Resume.fromJson(response.data);
       return resume;
@@ -17,7 +17,7 @@ class ResumeManager {
 
   static saveBasicInformation(
       {String origin,
-      int marriage,
+      int marriage = 0,
       String nation,
       String education,
       String speciality,

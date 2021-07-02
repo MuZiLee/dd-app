@@ -8,19 +8,19 @@
 //  版权所有 © 2019。 保留所有权利
 //
 
-import 'package:one/Model/Resume.dart';
-import 'package:one/Provider/ResumeManager.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesCity.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesEducation.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesHeader.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesNationality.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesSwitch.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesText.dart';
-import 'package:one/Views/CardSeries/CardViewSeriesTextView.dart';
-import 'package:one/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Model/Resume.dart';
+import 'package:demo2020/Provider/ResumeManager.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesCity.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesEducation.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesHeader.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesNationality.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesSwitch.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesText.dart';
+import 'package:demo2020/Views/CardSeries/CardViewSeriesTextView.dart';
+import 'package:demo2020/Views/bases/BaseScaffold.dart';
+import 'package:demo2020/Views/card_settings/widgets/card_settings_panel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:one/Views/card_settings/card_settings.dart';
 
 /// 基本信息
 class AddResumeViewController extends StatefulWidget {
@@ -31,6 +31,7 @@ class AddResumeViewController extends StatefulWidget {
   AddResumeViewController({this.resume}) {
     if (this.resume == null) {
       resume = Resume();
+      resume.marriage = 0;
     }
   }
 
@@ -48,74 +49,9 @@ class _AddResumeViewControllerState extends State<AddResumeViewController> {
       title: "基本信息",
       child: Container(
         child: Form(
-          child: CardSettings(
-            // padding: 0,
-            children: <Widget>[
-              CardViewSeriesHeader(
-                title: "*添加基本信息",
-              ),
-              CardViewSeriesCity(
-                title: "籍贯",
-                subtitle: widget.resume?.origin,
-                isNotNull: true,
-                onConfirm: (p, c, t) {
-                  widget.resume.origin = p + " " + c + " " + t;
-                },
-              ),
-              CardViewSeriesSwitch(
-                  title: "婚否",
-                  falseText: "未婚",
-                  trueText: "已婚",
-                  isNotNull: true,
-                  value: widget.resume?.marriage == 0 ? true : false,
-                  onChanged: (value) {
-                    widget.resume.marriage = value ? 1 : 0;
-                  }),
-              CardViewSeriesNationality(
-                title: "民族",
-                isNotNull: true,
-                subtitle: widget.resume?.nation,
-                onConfirm: (value) {
-                  widget.resume.nation = value;
-                },
-              ),
-              CardViewSeriesEducation(
-                title: "学历",
-                isNotNull: true,
-                subtitle: widget.resume?.education != null ? widget.resume?.education : "",
-                onConfirm: (value) {
-                  widget.resume.education = value;
-                },
-              ),
-              CardViewSeriesText(
-                title: "紧急联系人",
-                isNotNull: true,
-                placeholder: "姓名",
-                subtitle: widget.resume?.sos_name,
-                onChanged: (value) {
-                  widget.resume.sos_name = value;
-                },
-              ),
-              CardViewSeriesText(
-                title: "紧急联系人电话",
-                isNotNull: true,
-                placeholder: "11位手机号",
-                subtitle: widget.resume?.sos_phone,
-                onChanged: (value) {
-                  widget.resume.sos_phone = value;
-                },
-              ),
-              CardViewSeriesTextView(
-                title: "特长",
-                isNotNull: true,
-                color: Colors.grey,
-                text: widget.resume?.speciality,
-                valueChanged: (value) {
-                  widget.resume.speciality = value;
-                },
-              )
-            ],
-          ),
+          child: SingleChildScrollView(
+            child: buildColumn(),
+          )
         ),
       ),
       actions: <Widget>[
@@ -142,4 +78,76 @@ class _AddResumeViewControllerState extends State<AddResumeViewController> {
       ],
     );
   }
+
+
+  buildColumn() {
+    return Column(
+      children: <Widget>[
+        CardViewSeriesHeader(
+          title: "*添加基本信息",
+        ),
+        CardViewSeriesCity(
+          title: "籍贯",
+          subtitle: widget.resume?.origin,
+          isNotNull: true,
+          onConfirm: (p, c, t) {
+            widget.resume.origin = p + " " + c + " " + t;
+          },
+        ),
+        CardViewSeriesSwitch(
+            title: "婚否",
+            falseText: "未婚",
+            trueText: "已婚",
+            isNotNull: true,
+            value: widget.resume?.marriage == 0 ? true : false,
+            onChanged: (value) {
+              widget.resume.marriage = value ? 1 : 0;
+            }),
+        CardViewSeriesNationality(
+          title: "民族",
+          isNotNull: true,
+          subtitle: widget.resume?.nation,
+          onConfirm: (value) {
+            widget.resume.nation = value;
+          },
+        ),
+        CardViewSeriesEducation(
+          title: "学历",
+          isNotNull: true,
+          subtitle: widget.resume?.education != null ? widget.resume?.education : "",
+          onConfirm: (value) {
+            widget.resume.education = value;
+          },
+        ),
+        CardViewSeriesText(
+          title: "紧急联系人",
+          isNotNull: true,
+          placeholder: "姓名",
+          subtitle: widget.resume?.sos_name,
+          onChanged: (value) {
+            widget.resume.sos_name = value;
+          },
+        ),
+        CardViewSeriesText(
+          title: "紧急联系人电话",
+          isNotNull: true,
+          placeholder: "11位手机号",
+          subtitle: widget.resume?.sos_phone,
+          onChanged: (value) {
+            widget.resume.sos_phone = value;
+          },
+        ),
+        CardViewSeriesTextView(
+          title: "特长",
+          isNotNull: true,
+          color: Colors.grey,
+          text: widget.resume?.speciality,
+          valueChanged: (value) {
+            widget.resume.speciality = value;
+          },
+        )
+      ],
+    );
+  }
+
 }

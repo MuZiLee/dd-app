@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:one/views/404/Error404View.dart';
+import 'package:demo2020/views/404/Error404View.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

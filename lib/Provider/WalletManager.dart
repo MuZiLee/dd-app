@@ -1,13 +1,14 @@
 
 import 'dart:convert';
 
-import 'package:one/Model/AdvanceModel.dart';
-import 'package:one/Model/BankModel.dart';
-import 'package:one/Model/ServiceCharge.dart';
-import 'package:one/Model/WalletBillingDetailModel.dart';
-import 'package:one/Model/WalletModel.dart';
-import 'package:one/Provider/SBRequest/SBRequest.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Model/AdvanceModel.dart';
+import 'package:demo2020/Model/BankModel.dart';
+import 'package:demo2020/Model/ServiceCharge.dart';
+import 'package:demo2020/Model/WalletBillingDetailModel.dart';
+import 'package:demo2020/Model/WalletModel.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/SBRequest/SBRequest.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/cupertino.dart';
 
 class WalletManager extends ChangeNotifier {
@@ -55,7 +56,7 @@ class WalletManager extends ChangeNotifier {
 
   static availableAmount() async {
     var url = "wallet/availableAmount";
-    SBResponse response = await SBRequest.post(url);
+    SBResponse response = await SBRequest.post(url, arguments: {"uid":Account.user.id});
     return double.parse(response.data?.toString());
   }
 

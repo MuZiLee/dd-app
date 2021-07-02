@@ -8,15 +8,15 @@
 //  版权所有 © 2019。 保留所有权利
 //
 
-import 'package:one/Controller/WebBrowser/WebBrowserViewController.dart';
-import 'package:one/Provider/Account.dart';
-import 'package:one/Views/Bases/BaseScaffold.dart';
-import 'package:one/Views/InputViews.dart';
-import 'package:one/Views/Keyboard/BlankToolBarTool.dart';
-import 'package:one/Views/LogoWidget.dart';
-import 'package:one/Views/ThemeButton.dart';
-import 'package:one/config.dart';
-import 'package:one/utils/zeus_kit/utils/zk_common_util.dart';
+import 'package:demo2020/Controller/WebBrowser/WebBrowserViewController.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Views/InputViews.dart';
+import 'package:demo2020/Views/Keyboard/BlankToolBarTool.dart';
+import 'package:demo2020/Views/LogoWidget.dart';
+import 'package:demo2020/Views/ThemeButton.dart';
+import 'package:demo2020/config.dart';
+import 'package:demo2020/utils/zeus_kit/utils/zk_common_util.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
 
@@ -85,7 +85,7 @@ class _RegisterViewControllerState extends State<RegisterViewController> {
               ),
 
               //登录密码
-              PasswordInput(title: "请输入密码", onChanged: (String value) => passwor = value),
+              PasswordInput(title: Account.autoCode ?? "请输入密码", onChanged: (String value) => passwor = value),
 
               /// 验证码
               AuthCodeInput(

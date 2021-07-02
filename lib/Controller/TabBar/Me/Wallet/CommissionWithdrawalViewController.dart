@@ -1,9 +1,11 @@
 
-import 'package:one/Controller/TabBar/Me/Wallet/RollOutViewController.dart';
-import 'package:one/Model/DividendModel.dart';
-import 'package:one/Provider/DividendManager.dart';
-import 'package:one/Views/Bases/BaseScaffold.dart';
-import 'package:one/Views/CardSeries/CardRefresher.dart';
+import 'package:demo2020/Controller/TabBar/Me/Wallet/RollOutViewController.dart';
+import 'package:demo2020/Model/DividendModel.dart';
+import 'package:demo2020/Model/MoneyModel.dart';
+import 'package:demo2020/Provider/Account.dart';
+import 'package:demo2020/Provider/DividendManager.dart';
+import 'package:demo2020/Views/Bases/BaseScaffold.dart';
+import 'package:demo2020/Views/CardSeries/CardRefresher.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nav_router/nav_router.dart';
@@ -31,10 +33,33 @@ class _CommissionWithdrawalViewControllerState extends State<CommissionWithdrawa
       child: CardRefresher(
         onRefresh: () async{
 
-          List commission = await DividendManager.getCashableCommission(rid: widget.rid);
-          commission.map((e) {
-            businessCommission = businessCommission + double.parse(e.amount);
-          }).toList();
+          List commission = await DividendManager.getMoney(rid: widget.rid);
+          if (widget.rid == Account.resident_teacher) {
+            commission.map((e) {
+              businessCommission = businessCommission + double.parse(e.teacherBill);
+            }).toList();
+          } else if (widget.rid == Account.junior_partner) {
+            commission.map((e) {
+              businessCommission = businessCommission + double.parse(e.primaryBill);
+            }).toList();
+          } else if (widget.rid == Account.senior_partner) {
+            commission.map((e) {
+              businessCommission = businessCommission + double.parse(e.advancedBill);
+            }).toList();
+          } else if (widget.rid == Account.strategic_alliance) {
+            commission.map((e) {
+              businessCommission = businessCommission + double.parse(e.strategicBill);
+            }).toList();
+          } else if (widget.rid == Account.salesman) {
+            commission.map((e) {
+              businessCommission = businessCommission + double.parse(e.salesmanBill);
+            }).toList();
+          } else if (widget.rid == Account.dandankj) {
+            commission.map((e) {
+              businessCommission = businessCommission + double.parse(e.dandanBill);
+            }).toList();
+          }
+
           setState(() {});
         },
         child: Center(

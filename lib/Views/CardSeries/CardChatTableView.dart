@@ -1,5 +1,5 @@
 
-import 'package:one/Views/CardSeries/expanded_viewport.dart';
+import 'package:demo2020/Views/CardSeries/expanded_viewport.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
