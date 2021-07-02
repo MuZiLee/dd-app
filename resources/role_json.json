@@ -1,0 +1,165 @@
+[
+  {
+    "type": 0,
+    "title": "基础服务",
+    "height": 242.0,
+    "items": [
+      {
+        "title": "我的简历",
+        "url": "images/member/resume.png"
+      },
+      {
+        "title": "我的收藏",
+        "url": "images/member/collect.png"
+      },
+      {
+        "title": "验证邀请码",
+        "url": "images/member/binding.png"
+      }
+    ]
+  },
+  {
+    "type": 1,
+    "title": "会员服务",
+    "height": 142.0,
+    "items": [
+      {
+        "title": "我的经纪人",
+        "url": "images/member/personal.png"
+      },
+      {
+        "title": "申请",
+        "url": "images/member/apply.png"
+      },
+      {
+        "title": "历史记录",
+        "url": "images/member/feedback.png"
+      }
+    ]
+  },
+  {
+    "type": 2,
+    "title": "员工服务",
+    "height": 242.0,
+    "items": [
+      {
+        "title": "我的工时",
+        "url": "images/home/timer.png"
+      },
+      {
+        "title": "工作流",
+        "url": "images/member/workflow.png"
+      },
+      {
+        "title": "我的工资",
+        "url": "images/member/wage.png"
+      },
+      {
+        "title": "预支",
+        "url": "images/member/loans.png"
+      }
+    ]
+  },
+  {
+    "type": 100,
+    "title": "初级合伙人",
+    "height": 242.0,
+    "items": [
+      {
+        "title": "我的邀请码",
+        "url": "images/member/binding.png"
+      },
+      {
+        "title": "报名审核",
+        "url": "images/member/apply.png"
+      },
+      {
+        "title": "我的工人",
+        "url": "images/member/word.png"
+       },
+      {
+        "title": "我的初级提成",
+        "url": "images/member/gold.png"
+      }
+    ]
+  },
+  {
+    "type": 200,
+    "title": "高级合伙人",
+    "height": 142.0,
+    "items": [
+      {
+        "title": "我的初级合伙人",
+        "url": "images/member/partner.png"
+      },
+      {
+        "title": "高级分红",
+        "url": "images/member/collection.png"
+      }
+    ]
+  },
+  {
+    "type": 201,
+    "title": "*准高级合伙人",
+    "height": 142.0,
+    "items": [
+      {
+        "title": "*代收分红",
+        "url": "images/member/disabled.png"
+      }
+    ]
+  },
+  {
+    "type": 300,
+    "title": "战略联盟(企业)",
+    "height": 142.0,
+    "items": [
+      {
+        "title": "我的高级合伙人",
+        "url": "images/member/seniorpartner.png"
+      },
+      {
+        "title": "我的准高级合伙人",
+        "url": "images/member/disabled.png"
+      },
+      {
+        "title": "战略合伙分红",
+        "url": "images/member/collection.png"
+      }
+    ]
+  },
+  {
+    "type": 400,
+    "title": "驻场老师",
+    "height": 142.0,
+    "items": [
+      {
+        "title": "审核",
+        "url": "images/member/entry.png"
+      },
+      {
+        "title": "考勤",
+        "url": "images/member/check.png"
+      },
+      {
+        "title": "工资条",
+        "url": "images/member/payslip.png"
+      },
+      {
+        "title": "代离",
+        "url": "images/member/quit.png"
+      }
+    ]
+  },
+  {
+    "type": 500,
+    "title": "工厂HR",
+    "height": 142.0,
+    "items": [
+      {
+        "title": "工厂HR",
+        "url": "images/member/factory.png"
+      }
+    ]
+  }
+]

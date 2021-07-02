@@ -1,0 +1,60 @@
+apply plugin: 'com.mob.sdk'
+
+MobSDK {
+    appKey "2d392fa8095f6"
+    appSecret "Secret：d42f8b7ee8c98102049bc6ae65e7588b"
+
+    ShareSDK {
+
+        //平台配置信息
+        devInfo {
+
+            /* Wechat微信和WechatMoments微信朋友圈的appid是一样的；
+
+            注意：开发者不能用我们这两个平台的appid,否则分享不了
+            微信测试的时候，微信测试需要先签名打包出apk,
+            sample测试微信，要先签名打包，keystore在sample项目中，密码123456
+
+            BypassApproval是绕过审核的标记，设置为true后AppId将被忽略，故不经过
+            审核的应用也可以执行分享，但是仅限于分享文字和图片，不能分享其他类型，
+            默认值为false。此外，微信收藏不支持此字段。wx4868b35061f87885
+            <!--要分享微信小应用程序时用userName,path-->*/
+            // 微信好友
+            Wechat {
+                id 4
+                sortId 4
+                appId "wxff3811ed4eee8aaf"
+                appSecret "07a005b72995743166465a93e0887971"
+                userName ""
+                path ""
+                withShareTicket true
+                miniprogramType 0
+                bypassApproval false
+                enable true
+            }
+
+            // 微信朋友圈
+            WechatMoments {
+                id 5
+                sortId 5
+                appId "wxff3811ed4eee8aaf"
+                appSecret "07a005b72995743166465a93e0887971"
+                bypassApproval false
+                enable true
+            }
+
+//            微信收藏
+//            WechatFavorite {
+//                id 6
+//                sortId 6
+//                appId "wxff3811ed4eee8aaf"
+//                appSecret "07a005b72995743166465a93e0887971"
+//                bypassApproval false
+//                enable true
+//            }
+
+
+
+        }
+    }
+}

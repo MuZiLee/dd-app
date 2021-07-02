@@ -1,0 +1,297 @@
+name: one
+description: A new Flutter application.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.2.5+20052101
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^0.1.3
+
+  flutter_localizations:
+    sdk: flutter
+  flutter_cupertino_localizations: ^1.0.1
+
+  # 震动反馈
+#  flutter_vibrate: ^1.0.0
+  # 定位权限检测
+  permission_handler: ^4.1.0
+  # 高德定位插件
+  flutter_amap_location_plugin: ^1.0.2
+
+#  flutter_drag_scale:
+#    git: https://gitee.com/jerrylee132/flutter_drag_scale.git
+
+#  # 极光IM
+#  jmessage_flutter: ^0.5.0
+#  # 极光推送
+#  jpush_flutter: ^0.5.3
+  jmessage_flutter: 0.6.5
+  jpush_flutter: ^0.5.5
+  flutter_spinkit: ^4.1.2+1
+  # 拍照 相册
+  image_picker: ^0.6.5+2
+  # 键盘
+#  flutter_keyboard_visibility: ^2.0.0
+  # 滑动显示按钮
+  flutter_slidable_list_view: ^1.2.8
+  flutter_slidable: ^0.5.4
+  # 图片压缩
+  flutter_luban: ^0.1.1
+  # 工具类 "几小时前，昨天， 刚刚"等
+  common_utils: ^1.1.3
+  # 网络图片缓存
+  cached_network_image: ^2.1.0+1
+  # 图片浏览
+  photo_view: ^0.9.1
+  # 持久化
+  shared_preferences: ^0.5.4+5
+  # 社会化分享
+  sharesdk_plugin: ^1.2.4
+  # 网络请求
+  dio: ^3.0.9
+  # 版本信息
+  package_info: ^0.4.0+17
+  # 跳转
+  url_launcher: ^5.4.5
+  # Provide状态管理
+  provider: ^4.1.0
+  # 下拉刷新
+  flutter_easyrefresh: ^2.0.8
+  # 下拉刷新 (其他)
+  pull_to_refresh: ^1.5.7
+  # 折叠 header
+  expandable: ^3.0.1
+  flutter_sticky_header: ^0.4.2
+  flutter_screenutil: ^0.5.1
+  flutter_staggered_grid_view: ^0.3.0
+  # Swiper Banner
+  flutter_swiper: ^1.1.6
+  # 好看的横幅提示
+  flushbar: ^1.9.1
+  # 发光的Button
+  awesome_button: ^1.0.2
+  # 绑定邀请码 弹框
+  awesome_dialog: ^0.1.3
+  # 下拉列表 (首页使用)
+  gzx_dropdown_menu: ^1.0.1
+  # auto text
+  auto_size_text: ^2.1.0
+  # webview
+  webview_flutter: ^0.3.20+2
+  # 日期(年月日)
+  flutter_datetime_picker: ^1.3.8
+  # 评分
+  flutter_rating_bar: ^3.0.1+1
+  #城市选择
+  city_pickers: ^0.1.30
+  # hud
+  ovprogresshud: ^0.2.5
+  fluttertoast: ^3.1.3
+  # 邀请码输入框
+  pin_code_fields: ^2.5.1
+  # 支付密码输入框
+  pin_code_text_field: ^1.5.1
+  date_format: ^1.0.8
+  flutter_cupertino_data_picker: ^0.8.6
+  fluintl: 0.1.3
+  badges: ^1.1.0
+  # 导航
+  nav_router: ^0.0.5
+  # ----------- 商城使用
+  json_annotation: ^0.2.3
+  fluro: "^1.4.0"
+  flutter_html: ^0.11.0
+  cookie_jar: ^1.0.0
+  flutter_cupertino_settings: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  assets:
+    - resources/role_json.json
+    - resources/tone_skype.mp3
+
+    - images/addImage.png
+
+    - images/Logo.png
+    - images/Launch.png
+    - images/jobing.png
+    - images/nodata.png
+
+    - images/Avatar/avatar.png
+    - images/qrcode.png
+
+    - images/tabbar/chat.png
+    - images/tabbar/me.png
+
+    - images/home/announcement.png
+    - images/home/goldenEggs.png
+    - images/home/increaseknowledge.png
+    - images/home/job.png
+    - images/home/shopping.png
+    - images/home/timer.png
+    - images/home/workers.png
+    - images/home/city.png
+    - images/home/hot.png
+    - images/home/apply.png
+    - images/home/wechatfriend.png
+    - images/home/wechatCircle.png
+
+    - images/password/unvisible.png
+    - images/password/visible.png
+
+    # member
+    - images/member/apply.png
+    - images/member/binding.png
+    - images/member/collect.png
+    - images/member/collection.png
+    - images/member/dividend.png
+    - images/member/eventHandling.png
+    - images/member/feedback.png
+    - images/member/gold.png
+    - images/member/memberbg.png
+    - images/member/disabled.png
+    - images/member/partner.png
+    - images/member/pushmoney.png
+    - images/member/resume.png
+    - images/member/seting.png
+    - images/member/userinfo.png
+    - images/member/seniorpartner.png
+    - images/member/wage.png
+    - images/member/wallet.png
+    - images/member/workflow.png
+    - images/member/word.png
+    - images/member/preferences.png
+    - images/member/personal.png
+    - images/member/wordtime.png
+    - images/member/qrcode.png
+    - images/member/loans.png
+
+    - images/member/verify.png
+
+    - images/member/history.png
+    - images/member/check.png
+    - images/member/factory.png
+    - images/member/teacher.png
+
+    - images/member/quit.png
+    - images/member/clockin.png
+    - images/member/leave.png
+    - images/member/reimbursement.png
+    - images/member/entry.png
+    - images/member/payslip.png
+
+    - images/member/qrcode/qrcode.png
+    - images/member/qrcode/qrcodebg.png
+    - images/member/qrcode/qrcodelogo.png
+    - images/member/qrcode/qrcodeContentbg.png
+
+    # 加班
+    - images/member/event.png
+    - images/member/overtime0.png
+    - images/member/overtime1.png
+    - images/member/overtime2.png
+    - images/member/overtime3.png
+
+    - images/member/price.png
+    - images/member/report.png
+    - images/member/order.png
+
+
+    - images/loading.jpg
+
+    #4个tab切换图片资源
+    - images/contact_list_normal.png
+    - images/contact_list_pressed.png
+    - images/find_normal.png
+    - images/find_pressed.png
+    - images/profile_normal.png
+    - images/profile_pressed.png
+    - images/weixin_normal.png
+    - images/weixin_pressed.png
+
+    #菜单按钮
+    - images/icon_menu_addfriend.png
+    - images/icon_menu_group.png
+    - images/icon_menu_scan.png
+
+    #通讯录图标
+    - images/icon_addfriend.png
+    - images/icon_groupchat.png
+    - images/icon_public.png
+
+
+    #发现模块图标
+    - images/icon_friends.png
+    - images/icon_scan.png
+    - images/icon_shake.png
+    - images/icon_look.png
+    - images/icon_search.png
+    - images/icon_near.png
+    - images/icon_bottle.png
+    - images/icon_shop.png
+    - images/icon_game.png
+    - images/icon_link.png
+
+
+    #个人中心模块图标
+    - images/icon_me_card.png
+    - images/icon_me_collect.png
+    - images/icon_me_money.png
+    - images/icon_me_photo.png
+    - images/icon_me_setting.png
+    - images/icon_me_smile.png
+    - images/code.png
+    - images/tutu.png
+
+
+    - images/ic_data_empty.png
+    - images/ic_login_bg.png
+    - images/ic_network_error.png
+    - images/tutu.png
+
+    #商城
+    - images/shop/line_botm.jpg
+    - images/paysuccessful.png
+
+    #钱包
+    - images/member/wallet/icon-wallet-001.png
+    - images/member/wallet/icon-wallet-002.png
+    - images/member/wallet/icon-wallet-003.png
+    - images/member/wallet/icon-wallet-006.png
+    - images/member/wallet/icon-wallet-008.png
+    - images/member/wallet/icon-wallet-013.png
